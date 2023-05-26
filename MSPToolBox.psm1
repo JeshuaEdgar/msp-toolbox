@@ -11,6 +11,7 @@ $mspToolBoxData = @{
     ApplicationSecret = $null
     Refreshtoken      = $null
     TenantID          = $null
+    GraphAuthHeader   = $null
 }
 $script:mspToolBoxSession = $mspToolBoxData
 #end of variables
