@@ -12,23 +12,26 @@ function Connect-MSPToolbox {
     )
     $ErrorActionPreference = "Stop"
     try {
+        $appSecret = $ApplicationSecret | ConvertTo-SecureString -AsPlainText -Force
         Write-Verbose "MSPToolBox | Connecting with Microsoft CSP with given values..."
-        $graphToken = New-PartnerAccessToken -ServicePrincipal @{
+        $graphSplat = @{
             ApplicationId = $ApplicationID
-            Credential    = New-Object System.Management.Automation.PSCredential($ApplicationID, $ApplicationSecret)
+            Credential    = New-Object System.Management.Automation.PSCredential($ApplicationID, $appSecret)
             RefreshToken  = $Refreshtoken
             Scopes        = 'https://graph.microsoft.com/.default'
             Tenant        = $TenantID
         }
+        $graphToken = New-PartnerAccessToken -ServicePrincipal @graphSplat
         # build auth header
         $authHeader = @{ Authorization = $graphToken.AccessToken }
 
         Write-Verbose "MSPToolBox | Getting list of partner customers..."
-        $customers = Invoke-RestMethod @{
+        $customerSplat = @{
             Method = "Get"
             URI    = "https://graph.microsoft.com/beta/contracts?`$top=999"
             Header = $authHeader
         }
+        $customers = Invoke-RestMethod @customerSplat
 
         Write-Verbose "MSPToolBox | Verifying customers..."
         if (($customers.value).count -ge 1) {
@@ -45,6 +48,8 @@ function Connect-MSPToolbox {
         }
     }
     catch {
-        Write-Error (Format-ErrorCodes).ErrorMessage
+        Write-Error (Format-ErrorCodes $_).ErrorMessage
     }
+    Write-Host "MSPToolBox | Connected!"
+    return $true | Out-Null
 }

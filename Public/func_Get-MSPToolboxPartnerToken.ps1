@@ -1,4 +1,4 @@
-function Get-PartnerToken {
+function Get-MSPToolboxPartnerToken {
     param (
         [parameter(Mandatory = $true)]
         [string]$TenantID
