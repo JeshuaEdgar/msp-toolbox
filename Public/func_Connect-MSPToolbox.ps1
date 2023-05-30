@@ -12,6 +12,7 @@ function Connect-MSPToolbox {
     )
     $ErrorActionPreference = "Stop"
     try {
+        Test-MSPToolboxConnection
         $appSecret = $ApplicationSecret | ConvertTo-SecureString -AsPlainText -Force
         Write-Verbose "MSPToolBox | Connecting with Microsoft CSP with given values..."
         $graphSplat = @{

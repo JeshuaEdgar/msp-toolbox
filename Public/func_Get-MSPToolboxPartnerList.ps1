@@ -1,5 +1,6 @@
 function Get-MSPToolboxPartnerList {
     try {
+        Test-MSPToolboxConnection
         $customerSplat = @{
             Method = "Get"
             URI    = "https://graph.microsoft.com/beta/contracts?`$top=999"

@@ -11,6 +11,7 @@ function Get-MSPToolboxPartnerToken {
         Credential    = New-Object System.Management.Automation.PSCredential($scipt:mspToolBoxSession.ApplicationID, $scipt:mspToolBoxSession.ApplicationSecret)
     }
     try {
+        Test-MSPToolboxConnection
         return @{
             Authorization = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)"
         }
