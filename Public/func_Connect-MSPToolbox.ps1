@@ -26,10 +26,10 @@ function Connect-MSPToolbox {
         # build auth header
         $authHeader = @{ Authorization = $graphToken.AccessToken }
 
-        Write-Verbose "MSPToolBox | Getting list of partner customers..."
+        Write-Verbose "MSPToolBox | Checking connection and functionalitys..."
         $customerSplat = @{
             Method = "Get"
-            URI    = "https://graph.microsoft.com/beta/contracts?`$top=999"
+            URI    = "https://graph.microsoft.com/beta/contracts"
             Header = $authHeader
         }
         $customers = Invoke-RestMethod @customerSplat
@@ -51,6 +51,5 @@ function Connect-MSPToolbox {
     catch {
         Write-Error (Format-ErrorCodes $_).ErrorMessage
     }
-    Write-Host "MSPToolBox | Connected!"
     return $true | Out-Null
 }
