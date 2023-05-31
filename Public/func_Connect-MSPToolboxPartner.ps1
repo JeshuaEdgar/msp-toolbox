@@ -16,6 +16,7 @@ function Connect-MSPToolboxPartner {
         $script:CustomerAuthHeader = @{ Authorization = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)" }
         try {
             $organisationCheck = New-GraphRequest -Method "Get" -Endpoint "organization"
+            $script:mspToolBoxSession.ConnectedTenant = $organisationCheck.value.displayName
             Write-Verbose ("Connected to tenant {0}" -f $organisationCheck.value.displayName)
         }
         catch {
