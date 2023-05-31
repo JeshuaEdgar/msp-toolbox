@@ -13,6 +13,7 @@ $mspToolBoxData = @{
     TenantID           = $null
     GraphAuthHeader    = $null
     CustomerAuthHeader = $null
+    ConnectedTenant    = $null
 }
 $script:mspToolBoxSession = $mspToolBoxData
 #end of variables
