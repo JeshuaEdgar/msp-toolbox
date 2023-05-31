@@ -1,7 +1,8 @@
 function New-GraphRequest {
     param (
+        [CmdletBinding()]
         [parameter (Mandatory = $true)][string]$Endpoint,
-        [parameter (Mandatory = $true)][ValidateSet( "Delete", "Get,", "Patch", "Post", "Put")]$Method,
+        [parameter (Mandatory = $true)][ValidateSet("Delete", "Get", "Patch", "Post", "Put")]$Method,
         [array]$Body,
         [switch]$Beta
     )
@@ -30,7 +31,7 @@ function New-GraphRequest {
     }
 
     try {
-        Invoke-RestMethod @reqSplat
+        return Invoke-RestMethod @reqSplat
     }
     catch {
         (Format-ErrorCodes $_).ErrorMessage
