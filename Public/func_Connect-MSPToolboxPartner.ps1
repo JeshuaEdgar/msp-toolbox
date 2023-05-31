@@ -1,5 +1,6 @@
 function Connect-MSPToolboxPartner {
     param (
+        [CmdletBinding()]
         [parameter(Mandatory = $true)]
         [string]$TenantID
     )
@@ -12,9 +13,16 @@ function Connect-MSPToolboxPartner {
     }
     try {
         Test-MSPToolboxConnection
-        $script:CustomerAuthHeader = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)"
+        $script:CustomerAuthHeader = @{ Authorization = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)" }
+        try {
+            $organisationCheck = New-GraphRequest -Method "Get" -Endpoint "organization"
+            Write-Verbose ("Connected to tenant {0}" -f $organisationCheck.value.displayName)
+        }
+        catch {
+            throw (Format-ErrorCodes $_).ErrorMessage
+        }
     }
     catch {
-        Write-Error (Format-ErrorCodes $_).ErrorMessage
+        throw (Format-ErrorCodes $_).ErrorMessage
     }
 }
