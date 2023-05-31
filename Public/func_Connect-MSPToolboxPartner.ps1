@@ -1,4 +1,4 @@
-function New-MSPToolboxPartnerToken {
+function Connect-MSPToolboxPartner {
     param (
         [parameter(Mandatory = $true)]
         [string]$TenantID
@@ -12,9 +12,7 @@ function New-MSPToolboxPartnerToken {
     }
     try {
         Test-MSPToolboxConnection
-        return @{
-            Authorization = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)"
-        }
+        $script:CustomerAuthHeader = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)"
     }
     catch {
         Write-Error (Format-ErrorCodes $_).ErrorMessage
