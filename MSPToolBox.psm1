@@ -7,11 +7,12 @@ Write-Verbose "Loading module $ModuleName"
 #load variables for module
 Write-Verbose "Creating modules variables"
 $mspToolBoxData = @{
-    ApplicationID     = $null
-    ApplicationSecret = $null
-    Refreshtoken      = $null
-    TenantID          = $null
-    GraphAuthHeader   = $null
+    ApplicationID      = $null
+    ApplicationSecret  = $null
+    Refreshtoken       = $null
+    TenantID           = $null
+    GraphAuthHeader    = $null
+    CustomerAuthHeader = $null
 }
 $script:mspToolBoxSession = $mspToolBoxData
 #end of variables
