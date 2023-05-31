@@ -1,12 +1,12 @@
 function Get-MSPToolboxCurrentConnection {
-    if ($null -ne $script:mspToolBoxSession) {
+    if ([string]::IsNullOrEmpty($script:mspToolBoxSession.ConnectedTenant)) {
         return [PSCustomObject]@{
-            ConnectedTenant = $script:mspToolBoxSession.CurrentTenant
+            ConnectedTenant = "Not connected to any Partner tenant at the moment"
         }
     }
     else {
         return [PSCustomObject]@{
-            ConnectedTenant = "Not connected to any Partner tenant at the moment"
+            ConnectedTenant = $script:mspToolBoxSession.ConnectedTenant
         }
     }
 }

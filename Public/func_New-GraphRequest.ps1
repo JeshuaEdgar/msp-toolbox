@@ -34,6 +34,6 @@ function New-GraphRequest {
         return Invoke-RestMethod @reqSplat
     }
     catch {
-        (Format-ErrorCodes $_).ErrorMessage
+        throw (Format-ErrorCodes $_).ErrorMessage
     }
 }
