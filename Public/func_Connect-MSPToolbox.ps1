@@ -24,7 +24,7 @@ function Connect-MSPToolbox {
         }
         $graphToken = New-PartnerAccessToken -ServicePrincipal @graphSplat
         # build auth header
-        $authHeader = @{ Authorization = $graphToken.AccessToken }
+        $authHeader = @{ Authorization = "Bearer $($graphToken.AccessToken)" }
 
         Write-Verbose "MSPToolBox | Checking connection and functionalitys..."
         $customerSplat = @{
