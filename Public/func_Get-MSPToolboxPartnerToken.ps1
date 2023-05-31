@@ -7,8 +7,8 @@ function Get-MSPToolboxPartnerToken {
     $tokenSplat = @{
         Scopes        = "https://graph.microsoft.com/.default"
         Tenant        = $TenantID
-        ApplicationID = $scipt:mspToolBoxSession.ApplicationID
-        Credential    = New-Object System.Management.Automation.PSCredential($scipt:mspToolBoxSession.ApplicationID, $scipt:mspToolBoxSession.ApplicationSecret)
+        ApplicationID = $script:mspToolBoxSession.ApplicationID
+        Credential    = New-Object System.Management.Automation.PSCredential($script:mspToolBoxSession.ApplicationID, ($script:mspToolBoxSession.ApplicationSecret | ConvertTo-SecureString -AsPlainText -Force))
     }
     try {
         Test-MSPToolboxConnection
