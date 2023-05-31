@@ -21,3 +21,11 @@ Getting a Graph token for your tenant you want to control is easy, just provide 
 ```powershell
 New-MSPToolboxPartnerToken -TenantID "TenantIDYouWantToConnectTo"
 ```
+
+## Getting partner resources
+
+Get a list of all tenants you manage in the Partner Center (get tenant Id's etc.)
+
+```powershell
+Get-MSPToolboxPartnerList
+```
