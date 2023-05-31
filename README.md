@@ -16,11 +16,13 @@ To connect to the Partner Center use the following
 Connect-MSPToolbox -ApplicationID "YourSecretApplicationID" -ApplicationSecret "YourSecretApplicationID" -RefreshToken "ThatExtremelyLongPeskyRefreshToken" -TenantID "YourTenantID"  
 ```
 
-Getting a Graph token for your tenant you want to control is easy, just provide the ```TenantID``` for the tenant you want to connect to after ```Connect-MSPToolbox```
+Getting a Graph token for Partner tenant you want to control is easy, just provide the ```TenantID``` for the tenant you want to connect to after running ```Connect-MSPToolbox```
 
 ```powershell
-New-MSPToolboxPartnerToken -TenantID "TenantIDYouWantToConnectTo"
+Connect-MSPToolboxPartner -TenantID "TenantIDYouWantToConnectTo"
 ```
+
+Once connected to a Partner tenant you are able to forget about tokens, just pass your endpoint, method and body and you are set!
 
 ## Getting partner resources
 
