@@ -6,7 +6,7 @@ Module is in progress... created with MSP's in mind for unattended scripts on fo
 
 ## Installation
 
-Download this repository as a .zip, in a PowerShell terminal run ```Import-Module .\MSPToolBox.psm1 -Force -Verbose```
+```Install-Module MSPToolbox -AllowPrerelease```
 
 ## Connecting/getting tokens
 

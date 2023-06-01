@@ -12,7 +12,7 @@
     RootModule        = '.\MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.1'
+    ModuleVersion     = '0.0.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -24,13 +24,13 @@
     Author            = 'Jeshua Edgar'
 
     # Company or vendor of this module
-    CompanyName       = 'Unknown'
+    CompanyName       = 'Jeshua Edgar'
 
     # Copyright statement for this module
     Copyright         = '(c) Jeshua Edgar. All rights reserved.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'This module leverages Secure App Model and PartnerCenter to connect to all your Partner Center tenants'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''
@@ -101,22 +101,22 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags         = @("Graph", "Partner", "Center", "Secure", "App", "Model")
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri   = 'https://github.com/JeshuaEdgar/MSPToolbox/blob/development/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri   = 'https://github.com/JeshuaEdgar/MSPToolbox'
 
             # A URL to an icon representing this module.
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'Initial release, for testing'
 
             # Prerelease string of this module
-            # Prerelease = ''
+            Prerelease   = 'alpha'
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             # RequireLicenseAcceptance = $false
