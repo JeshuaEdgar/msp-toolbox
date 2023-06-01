@@ -1,12 +1,14 @@
 # MSPToolBox
 
-Module is in progress... created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the Secure App Model and PartnerCenter for multi-tenant scripting.
+Module is in progress... created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the Secure App Model and PartnerCenter for multi-tenant scripting. See below for some example(s) on how to use it.
 
 ## [Changelog](./CHANGELOG.MD)
 
 ## Installation
 
-```Install-Module MSPToolbox -AllowPrerelease```
+```powershell
+Install-Module MSPToolbox -AllowPrerelease
+```
 
 ## Connecting/getting tokens
 
@@ -30,4 +32,27 @@ Get a list of all tenants you manage in the Partner Center (get tenant Id's etc.
 
 ```powershell
 Get-MSPToolboxPartnerList
+```
+
+## Example(s)
+
+```powershell
+# Fill in all parameters to connect to your Secure App Model application
+$connect = @{
+    ApplicationID     = "YourSecretApplicationID"
+    ApplicationSecret = "YourSecretApplicationID"
+    Refreshtoken      = "ThatExtremelyLongPeskyRefreshToken"
+    TenantID          = "YourTenantID"
+}
+
+Connect-MSPToolbox @connect
+
+foreach ($partner in Get-MSPToolboxPartnerList){
+    Connect-MSPToolboxPartner -TenantID $partner.CustomerId
+
+    # Run Microsoft Graph requests from here
+    # We are showing an example that uses the following documentation: https://learn.microsoft.com/en-us/graph/api/organization-get?view=graph-rest-1.0
+    
+    New-GraphRequest -Endpoint "organization" -Method "Get"
+}
 ```
