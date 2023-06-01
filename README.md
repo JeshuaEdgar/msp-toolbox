@@ -1,6 +1,8 @@
 # MSPToolBox
 
-Module is in progress... created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the Secure App Model and PartnerCenter for multi-tenant scripting. See below for some example(s) on how to use it.
+Module is in progress... created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/using-the-secure-app-model-to-connect-to-microsoft-partner-resources/) and the PartnerCenter module for multi-tenant scripting. See below for some example(s) on how to use it.
+
+Special credits to [Kelvin Tegelaar](https://github.com/KelvinTegelaar) for coining the Secure App Model for MSP's
 
 ## [Changelog](./CHANGELOG.MD)
 
@@ -52,7 +54,7 @@ foreach ($partner in Get-MSPToolboxPartnerList){
 
     # Run Microsoft Graph requests from here
     # We are showing an example that uses the following documentation: https://learn.microsoft.com/en-us/graph/api/organization-get?view=graph-rest-1.0
-    
+
     New-GraphRequest -Endpoint "organization" -Method "Get"
 }
 ```
