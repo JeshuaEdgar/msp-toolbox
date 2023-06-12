@@ -49,7 +49,7 @@ function Connect-MSPToolbox {
         }
     }
     catch {
-        Write-Error (Format-ErrorCodes $_).ErrorMessage
+        throw (Format-ErrorCodes $_).ErrorMessage
     }
     return $true | Out-Null
 }
