@@ -1,4 +1,4 @@
-function New-GraphRequest {
+function New-MSPGraphRequest {
     param (
         [CmdletBinding()]
         [parameter (Mandatory = $true)][string]$Endpoint,
