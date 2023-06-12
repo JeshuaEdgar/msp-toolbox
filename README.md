@@ -1,5 +1,7 @@
 # MSPToolBox
 
+![PSGalleryVersion](https://img.shields.io/powershellgallery/v/MSPToolBox?style=flat-square) ![PSGalleryDownloads](https://img.shields.io/powershellgallery/dt/MSPToolBox?style=flat-square)
+
 Module is in progress... created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/using-the-secure-app-model-to-connect-to-microsoft-partner-resources/) and the PartnerCenter module for multi-tenant scripting. See below for some example(s) on how to use it.
 
 Special credits to [Kelvin Tegelaar](https://github.com/KelvinTegelaar) for coining the Secure App Model for MSP's
