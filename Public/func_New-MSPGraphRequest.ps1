@@ -31,7 +31,7 @@ function New-MSPGraphRequest {
     }
 
     try {
-        return Invoke-RestMethod @reqSplat
+        return (Invoke-RestMethod @reqSplat).value
     }
     catch {
         throw (Format-ErrorCodes $_).ErrorMessage
