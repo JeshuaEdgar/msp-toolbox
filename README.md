@@ -59,4 +59,3 @@ foreach ($partner in Get-MSPToolboxPartnerList){
 
     New-GraphRequest -Endpoint "organization" -Method "Get"
 }
-```
