@@ -30,6 +30,6 @@ function Format-ErrorCodes {
         return $return_object
     }
     catch {
-        return Write-Error $ErrorObject.Exception.Message
+        throw $ErrorObject.Exception.Message
     }
 }
