@@ -3,8 +3,9 @@
 ## Changed
 
 - ```New-GraphRequest```
-    - Now called ```New-MSPGraphRequest```
+    - Now called ```Invoke-MSPGraphRequest```
     - Returns 'value' by default
+    - Pagination of data if "@odata.nextLink" is returned
 
 # [0.0.1-alpha]
 

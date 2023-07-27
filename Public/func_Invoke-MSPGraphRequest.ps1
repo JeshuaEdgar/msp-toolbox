@@ -1,4 +1,4 @@
-function New-MSPGraphRequest {
+function Invoke-MSPGraphRequest {
     param (
         [CmdletBinding()]
         [parameter (Mandatory = $true)][string]$Endpoint,
