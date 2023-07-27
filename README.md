@@ -10,6 +10,12 @@ Special credits to [Kelvin Tegelaar](https://github.com/KelvinTegelaar) for coin
 
 ## Installation
 
+Before you install the module, you will need to make sure you have the PartnerCenter module intalled in your environment.
+
+```powershell
+Install-Module PartnerCenter
+```
+
 ```powershell
 Install-Module MSPToolbox -AllowPrerelease
 ```
@@ -57,5 +63,6 @@ foreach ($partner in Get-MSPToolboxPartnerList){
     # Run Microsoft Graph requests from here
     # We are showing an example that uses the following documentation: https://learn.microsoft.com/en-us/graph/api/organization-get?view=graph-rest-1.0
 
-    New-GraphRequest -Endpoint "organization" -Method "Get"
+    Invoke-GraphRequest -Endpoint "organization" -Method "Get"
 }
+```

@@ -2,10 +2,12 @@
 
 ## Changed
 
-- ```New-GraphRequest```
-    - Now called ```Invoke-MSPGraphRequest```
-    - Returns 'value' by default
-    - Pagination of data if "@odata.nextLink" is returned
+- ```Invoke-MSPGraphRequest```
+    - Previously called ```New-GraphRequest```
+    - Returns 'value' by default if present. No need to add ```.value``` to extract it
+    - Pagination of data if ```@odata.nextLink``` is returned
+    - ```$Customer``` boolean switch, if you want to do a Graph request on your CSP tenant, default is set to ```$true```
+    - Default method is now set to ```Get```
 
 # [0.0.1-alpha]
 

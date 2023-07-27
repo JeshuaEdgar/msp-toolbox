@@ -10,6 +10,6 @@ function Get-MSPToolboxPartnerList {
         return [PSCustomObject]$customers.value
     }
     catch {
-        (Format-ErrorCodes $_).ErrorMessage
+        (Format-ErrorCode $_).ErrorMessage
     }    
 }
