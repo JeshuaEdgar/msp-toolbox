@@ -16,9 +16,19 @@ Before you install the module, you will need to make sure you have the PartnerCe
 Install-Module PartnerCenter
 ```
 
+### PowerShell Gallery
+
+Go ahead and install the MSPToolbox module by running the following:
+
 ```powershell
 Install-Module MSPToolbox -AllowPrerelease
 ```
+
+### Manual
+
+You can also download a release from Github if that is your prefered method. Download the source code and paste it in your modules folder.
+
+You can look this up by running ```$env:PSModulePath -split ";"```
 
 ## Connecting/getting tokens
 
@@ -63,6 +73,6 @@ foreach ($partner in Get-MSPToolboxPartnerList){
     # Run Microsoft Graph requests from here
     # We are showing an example that uses the following documentation: https://learn.microsoft.com/en-us/graph/api/organization-get?view=graph-rest-1.0
 
-    Invoke-GraphRequest -Endpoint "organization" -Method "Get"
+    Invoke-GraphRequest -Endpoint "organization"
 }
 ```
