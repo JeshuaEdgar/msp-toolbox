@@ -2,6 +2,9 @@ name: Publish module to PowerShellGallery
 on:
   release:
     types: [published]
+  push:
+    tags:
+    - '*'
   workflow_dispatch:
   
 jobs:
