@@ -6,14 +6,21 @@ on:
     tags:
     - '*'
   workflow_dispatch:
-  
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      PS_GALLERY_KEY: ${{secrets.PS_GALLERY_KEY}}
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: Publish Module
-      uses: pcgeek86/publish-powershell-module-action@v20
+    - uses: actions/checkout@v3
       with:
-        NuGetApiKey: ${{ secrets.PS_GALLERY_KEY }}
+        path: "MSPToolBox"
+    - name: Publish Module
+      shell: pwsh
+      run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module PartnerCenter -RequiredVersion "3.0.10" -Verbose -Force
+        $modulePath = Get-ChildItem -Recurse -Filter '*.psd1' | Select-Object -Unique -ExpandProperty Directory
+        $publishSplat = @{Path = $modulePath; NuGetApiKey = $env:PS_GALLERY_KEY}
+        Publish-Module @publishSplat -Verbose
