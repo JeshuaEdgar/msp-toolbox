@@ -30,6 +30,10 @@ You can also download a release from Github if that is your prefered method. Dow
 
 You can look this up by running ```$env:PSModulePath -split ";"```
 
+## Documentation
+
+For the documentation please look into the [docs folder](Docs/)
+
 ## Connecting/getting tokens
 
 To connect to the Partner Center use the following
@@ -73,6 +77,6 @@ foreach ($partner in Get-MSPToolboxPartnerList){
     # Run Microsoft Graph requests from here
     # We are showing an example that uses the following documentation: https://learn.microsoft.com/en-us/graph/api/organization-get?view=graph-rest-1.0
 
-    Invoke-GraphRequest -Endpoint "organization"
+    Invoke-MSPGraphRequest -Endpoint "organization"
 }
 ```

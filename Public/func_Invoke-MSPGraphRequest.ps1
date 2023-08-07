@@ -16,6 +16,8 @@ function Invoke-MSPGraphRequest {
         $baseURL = "https://graph.microsoft.com/{0}/" -f "v1.0"
     }
 
+    if ($Endpoint.StartsWith("/")) { $Endpoint = $Endpoint.Substring(1) }
+
     #create the splat first
     $reqSplat = @{
         Method  = $Method
