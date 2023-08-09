@@ -2,12 +2,9 @@
 
 #region discover module name
 $ScriptPath = Split-Path $MyInvocation.MyCommand.Path
-$ModuleName = $ExecutionContext.SessionState.Module
-Write-Verbose "Loading module $ModuleName"
 #endregion discover module name
 
 #load variables for module
-Write-Verbose "Creating modules variables"
 $mspToolBoxData = @{
     ApplicationID      = $null
     ApplicationSecret  = $null
@@ -30,31 +27,48 @@ try {
             }
         }
     }
-    $module = Get-Module -ListAvailable PartnerCenter
-    $minVer = "3.0.10"
-    if ($module.version -ge [version]$minver) {
-        Import-Module PartnerCenter -MinimumVersion $minVer -Force -Global
-    }
-    elseif ($module.version -lt [version]$minVer) {
-        try {
-            Update-Module PartnerCenter -Force
-            Import-Module PartnerCenter -MinimumVersion $minVer -Force -Global
-        }
-        catch {
-            throw "Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message
-        }
-    }
-    else {
-        try {
-            Install-Module PartnerCenter -MinimumVersion $minver
-            Import-Module PartnerCenter -MinimumVersion $minVer -Force -Global
-        }
-        catch {
-            throw "Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message
-        }
-    }
 }
 catch {
     Write-Error ("{0}: {1}" -f $_.BaseName, $_.Exception.Message)
     exit 1
+}
+
+# dependencies
+$module = Get-Module -ListAvailable PartnerCenter
+$minVer = "3.0.10"
+$importSplat = @{
+    Name           = "PartnerCenter"
+    MinimumVersion = $minver
+    Force          = $true
+    Global         = $true
+}
+if ($PSVersionTable.PSEdition -eq "Core" -and $IsWindows -eq $true) { 
+    $importSplat.UseWindowsPowershell = $true
+}
+
+if ($module.version -ge [version]$minver) {
+    try {
+        Import-Module @importSplat
+    }
+    catch {
+        throw "Failed to import 'PartnerCenter': {0}" -f $_.Exception.Message
+    }
+}
+elseif ($module.version -lt [version]$minVer) {
+    try {
+        Update-Module PartnerCenter -Force
+        Import-Module @importSplat
+    }
+    catch {
+        throw "Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message
+    }
+}
+else {
+    try {
+        Install-Module PartnerCenter -MinimumVersion $minver
+        Import-Module @importSplat
+    }
+    catch {
+        throw "Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message
+    }
 }
