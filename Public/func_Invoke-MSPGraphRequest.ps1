@@ -68,6 +68,6 @@ function Invoke-MSPGraphRequest {
         return $output
     }
     catch {
-        throw (Format-ErrorCode $_).ErrorMessage
+        Write-Error (Format-ErrorCode $_).ErrorMessage
     }
 }
