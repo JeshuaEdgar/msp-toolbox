@@ -1,3 +1,5 @@
+[CmdletBinding()]
+
 #region discover module name
 $ScriptPath = Split-Path $MyInvocation.MyCommand.Path
 $ModuleName = $ExecutionContext.SessionState.Module
@@ -26,6 +28,29 @@ try {
             if ($Scope -eq 'Public') {
                 Export-ModuleMember -Function ($_.BaseName -Split "_")[1] -ErrorAction Stop
             }
+        }
+    }
+    $module = Get-Module -ListAvailable PartnerCenter
+    $minVer = "3.0.10"
+    if ($module.version -ge [version]$minver) {
+        Import-Module PartnerCenter -MinimumVersion $minVer -Force -Global
+    }
+    elseif ($module.version -lt [version]$minVer) {
+        try {
+            Update-Module PartnerCenter -Force
+            Import-Module PartnerCenter -MinimumVersion $minVer -Force -Global
+        }
+        catch {
+            throw "Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message
+        }
+    }
+    else {
+        try {
+            Install-Module PartnerCenter -MinimumVersion $minver
+            Import-Module PartnerCenter -MinimumVersion $minVer -Force -Global
+        }
+        catch {
+            throw "Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message
         }
     }
 }
