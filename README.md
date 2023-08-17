@@ -2,21 +2,22 @@
 
 ![PSGalleryVersion](https://img.shields.io/powershellgallery/v/MSPToolBox?style=flat-square) ![PSGalleryDownloads](https://img.shields.io/powershellgallery/dt/MSPToolBox?style=flat-square)
 
-Module is in progress... created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/using-the-secure-app-model-to-connect-to-microsoft-partner-resources/) and the PartnerCenter module for multi-tenant scripting. See below for some example(s) on how to use it.
+Created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/using-the-secure-app-model-to-connect-to-microsoft-partner-resources/) and the PartnerCenter module for multi-tenant scripting. See below for some [example(s)](#examples) on how to use it.
 
 Special credits to [Kelvin Tegelaar](https://github.com/KelvinTegelaar) for coining the Secure App Model for MSP's
 
-## [Changelog](./CHANGELOG.MD)
+## Changelog
+
+For the changelog please look into the [changelog file](./CHANGELOG.MD)
+
 
 ## Installation
 
-Before you install the module, you will need to make sure you have the PartnerCenter module intalled in your environment.
+Before you install the module, for the best results, you will need to make sure you have the PartnerCenter module intalled in your environment.
 
 ```powershell
 Install-Module PartnerCenter
 ```
-
-### PowerShell Gallery
 
 Go ahead and install the MSPToolbox module by running the following:
 
@@ -24,22 +25,16 @@ Go ahead and install the MSPToolbox module by running the following:
 Install-Module MSPToolbox -AllowPrerelease
 ```
 
-### Manual
-
-You can also download a release from Github if that is your prefered method. Download the source code and paste it in your modules folder.
-
-You can look this up by running ```$env:PSModulePath -split ";"```
-
 ## Documentation
 
 For the documentation please look into the [docs folder](Docs/)
 
-## Connecting/getting tokens
+## Connecting
 
 To connect to the Partner Center use the following
 
 ```powershell
-Connect-MSPToolbox -ApplicationID "YourSecretApplicationID" -ApplicationSecret "YourSecretApplicationID" -RefreshToken "ThatExtremelyLongPeskyRefreshToken" -TenantID "YourTenantID"  
+Connect-MSPToolbox -ApplicationID "YourSecretApplicationID" -ApplicationSecret "YourSecretApplicationID" -RefreshToken "ThatExtremelyLongRefreshToken" -TenantID "YourTenantID"  
 ```
 
 Getting a Graph token for Partner tenant you want to control is easy, just provide the ```TenantID``` for the tenant you want to connect to after running ```Connect-MSPToolbox```
@@ -49,6 +44,8 @@ Connect-MSPToolboxPartner -TenantID "TenantIDYouWantToConnectTo"
 ```
 
 Once connected to a Partner tenant you are able to forget about tokens, just pass your endpoint, method and body and you are set!
+
+If the endpoint reports errors these will output as a shiny errorobject, easy to decode what's going on.
 
 ## Getting partner resources
 
@@ -65,7 +62,7 @@ Get-MSPToolboxPartnerList
 $connect = @{
     ApplicationID     = "YourSecretApplicationID"
     ApplicationSecret = "YourSecretApplicationID"
-    Refreshtoken      = "ThatExtremelyLongPeskyRefreshToken"
+    Refreshtoken      = "ThatExtremelyLongRefreshToken"
     TenantID          = "YourTenantID"
 }
 

@@ -12,7 +12,7 @@
     RootModule        = 'MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.1.4'
+    ModuleVersion     = '0.1.5'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -69,16 +69,16 @@
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = @(
+    FunctionsToExport = @()
+
+    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
+    CmdletsToExport   = @(
         "Connect-MSPToolbox",
         "Connect-MSPToolboxPartner",
         "Get-MSPToolboxCurrentConnection",
         "Get-MSPToolboxPartnerList",
         "Invoke-MSPGraphRequest"
     )
-
-    # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport   = @()
 
     # Variables to export from this module
     VariablesToExport = '*'
@@ -113,7 +113,7 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'MSPToolBox'
+            ReleaseNotes = 'https://github.com/JeshuaEdgar/msp-toolbox/releases'
 
             # Prerelease string of this module
             Prerelease   = 'alpha'

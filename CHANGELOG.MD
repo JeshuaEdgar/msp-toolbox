@@ -1,3 +1,11 @@
+# [0.1.5-alpha]
+
+## Fixed
+
+- Module now exports cmdlet's instead of functions 
+- PartnerCenter module import
+- Unnecesary throws
+
 # [0.1.0-alpha]
 
 ## Changed
