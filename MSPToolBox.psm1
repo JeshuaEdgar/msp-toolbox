@@ -23,7 +23,7 @@ try {
         Get-ChildItem (Join-Path -Path $ScriptPath -ChildPath $Scope) -Recurse -Filter "func_*.ps1" | ForEach-Object {
             . $_.FullName
             if ($Scope -eq 'Public') {
-                Export-ModuleMember -Cmdlet ($_.BaseName -Split "_")[1] -ErrorAction Stop
+                Export-ModuleMember -Function ($_.BaseName -Split "_")[1] -ErrorAction Stop
             }
         }
     }
