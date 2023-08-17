@@ -12,7 +12,7 @@
     RootModule        = 'MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.1.5'
+    ModuleVersion     = '0.1.6'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -116,7 +116,7 @@
             ReleaseNotes = 'https://github.com/JeshuaEdgar/msp-toolbox/releases'
 
             # Prerelease string of this module
-            Prerelease   = 'alpha'
+            Prerelease   = 'beta'
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             # RequireLicenseAcceptance = $false
