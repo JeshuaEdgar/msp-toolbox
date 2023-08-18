@@ -1,3 +1,9 @@
+# [0.1.7-beta]
+
+## Fixed
+
+- `Content-Type` of requests is now `application/json`
+
 # [0.1.5-alpha]
 
 ## Fixed
