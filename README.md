@@ -24,7 +24,7 @@ Install-Module PartnerCenter
 Go ahead and install the MSPToolbox module by running the following:
 
 ```powershell
-Install-Module MSPToolbox -AllowPrerelease
+Install-Module MSPToolbox
 ```
 
 ## Documentation
