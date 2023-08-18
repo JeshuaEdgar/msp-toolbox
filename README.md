@@ -4,7 +4,9 @@
 
 Created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/connect-to-exchange-online-automated-when-mfa-is-enabled-using-the-secureapp-model/) and the PartnerCenter module for multi-tenant scripting. See below for some [example(s)](#examples) on how to use it.
 
-Special credits to [Kelvin Tegelaar](https://github.com/KelvinTegelaar) for coining the Secure App Model for MSP's
+Special credits to [Kelvin Tegelaar](https://github.com/KelvinTegelaar) for making the Secure App Model popular among MSP's
+
+Microsoft's documentation about the [Secure App Model](https://learn.microsoft.com/en-us/powershell/partnercenter/secure-app-model?view=partnercenterps-1.5&viewFallbackFrom=partnercenterps-3.0)
 
 ## Changelog
 
