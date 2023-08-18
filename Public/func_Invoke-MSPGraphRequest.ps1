@@ -4,7 +4,7 @@ function Invoke-MSPGraphRequest {
         [parameter (Mandatory = $true)][string]$Endpoint,
         [parameter (Mandatory = $false)][ValidateSet("Delete", "Get", "Patch", "Post", "Put")]$Method = "Get",
         [bool]$Customer = $true,
-        [array]$Body,
+        [hashtable]$Body,
         [switch]$Beta
     )
     Test-MSPToolboxConnection
@@ -24,8 +24,8 @@ function Invoke-MSPGraphRequest {
         URI     = $baseUrl + $Endpoint
         Headers = $script:CustomerAuthHeader
     }
-    if ($Body -is [array]) {
-        $reqSplat.Body += $Body
+    if ($Body -is [hashtable]) {
+        $reqSplat.Body += $Body | ConvertTo-Json -Depth 5
     }
 
     $reqSplat.GetEnumerator() | ForEach-Object {

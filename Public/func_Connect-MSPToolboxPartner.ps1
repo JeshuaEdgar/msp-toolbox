@@ -13,7 +13,7 @@ function Connect-MSPToolboxPartner {
     }
     try {
         Test-MSPToolboxConnection
-        $script:CustomerAuthHeader = @{ Authorization = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)" }
+        $script:CustomerAuthHeader = @{ Authorization = "Bearer $((New-PartnerAccessToken @tokenSplat -ServicePrincipal).AccessToken)"; "Content-Type" = "application/json" }
         try {
             $organisationCheck = Invoke-MSPGraphRequest -Method Get -Endpoint "organization"
             $script:mspToolBoxSession.ConnectedTenant = $organisationCheck.displayName

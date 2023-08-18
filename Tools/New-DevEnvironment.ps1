@@ -9,7 +9,7 @@ ForEach ($key in $devSettings.PSObject.Properties.Name) {
     }
 }
 
-Import-Module "$moduleRoot\MSPToolBox.psm1" -Force -Verbose
+Import-Module "$moduleRoot\MSPToolBox.psd1" -Force -Verbose
 
 $connectSplat = @{
     ApplicationID     = $env:ApplicationID
