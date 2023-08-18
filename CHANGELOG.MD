@@ -3,6 +3,7 @@
 ## Fixed
 
 - `Content-Type` of requests is now `application/json`
+- Body parameter for `Invoke-MSPGraphRequest` was set to `[array]`, this is now accepts a `[hashtable]`
 
 # [0.1.5-alpha]
 
