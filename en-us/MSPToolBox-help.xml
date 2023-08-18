@@ -2,6 +2,85 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Connect-MSPPartner</command:name>
+      <command:verb>Connect</command:verb>
+      <command:noun>MSPPartner</command:noun>
+      <maml:description>
+        <maml:para>Use this commandlet to connect to a CSP Partner just by using their tenant ID</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this commandlet to connect to a CSP Partner just by using their tenant ID</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Connect-MSPPartner</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>TenantID</maml:name>
+          <maml:description>
+            <maml:para>Tenant ID of the tenant you wan to connect to</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>TenantID</maml:name>
+        <maml:description>
+          <maml:para>Tenant ID of the tenant you wan to connect to</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Connect-MSPPartner -TenantID "12abc-*********************"</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Connect-MSPToolbox</command:name>
       <command:verb>Connect</command:verb>
       <command:noun>MSPToolbox</command:noun>
@@ -146,85 +225,6 @@
         <dev:code>PS C:\&gt; Connec-MSPToolbox -ApplicationID "12abc-****************" -ApplicationSecret "************" -RefreshToken "***********" -TenantID "112abc-***************"</dev:code>
         <dev:remarks>
           <maml:para>All parameters are mandatory, to create the Azure AD Application with the required permissions visit this blog (https://www.cyberdrain.com/using-the-secure-app-model-to-connect-to-microsoft-partner-resources/)</maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Connect-MSPToolboxPartner</command:name>
-      <command:verb>Connect</command:verb>
-      <command:noun>MSPToolboxPartner</command:noun>
-      <maml:description>
-        <maml:para>Use this commandlet to connect to a CSP Partner just by using their tenant ID</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Use this commandlet to connect to a CSP Partner just by using their tenant ID</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Connect-MSPToolboxPartner</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>TenantID</maml:name>
-          <maml:description>
-            <maml:para>Tenant ID of the tenant you wan to connect to</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>TenantID</maml:name>
-        <maml:description>
-          <maml:para>Tenant ID of the tenant you wan to connect to</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Connect-MSPToolBoxPartner -TenantID "12abc-*********************"</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -401,9 +401,9 @@
           <maml:description>
             <maml:para>Accepts a hasthable as input</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">Array</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
           <dev:type>
-            <maml:name>Array</maml:name>
+            <maml:name>Hashtable</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -439,9 +439,9 @@
         <maml:description>
           <maml:para>Accepts a hasthable as input</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">Array</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
         <dev:type>
-          <maml:name>Array</maml:name>
+          <maml:name>Hashtable</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>

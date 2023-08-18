@@ -1,3 +1,16 @@
+# [1.0.0]
+
+This marks the first non-prerelease version of MSPToolbox! I feel like this version is production ready. Must there be any problems you are facing please don't hesitate to make an issue request. Please read the changelog below for previous versions. For this first non-prerelease version the following has been changed/added:
+
+## Changed
+
+- `Connect-MSPToolboxPartner` is now `Connect-MSPPartner`
+- Docs have been updated, use `Get-Help <command>` to get help and/or examples on how to use this module
+
+## Fixed
+
+- Dev environment has been fixed
+
 # [0.1.7-beta]
 
 ## Fixed

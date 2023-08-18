@@ -13,7 +13,7 @@ Gets the list of available tenants in from your CSP
 ## SYNTAX
 
 ```
-Get-MSPToolboxPartnerList
+Get-MSPToolboxPartnerList [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,6 +29,9 @@ PS C:\> Get-MSPToolBoxPartnerList
 Usage: foreach loop, variables
 
 ## PARAMETERS
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

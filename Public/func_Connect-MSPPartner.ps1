@@ -1,4 +1,4 @@
-function Connect-MSPToolboxPartner {
+function Connect-MSPPartner {
     param (
         [CmdletBinding()]
         [parameter(Mandatory = $true)]

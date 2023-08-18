@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Connect-MSPToolboxPartner
+# Connect-MSPPartner
 
 ## SYNOPSIS
 Use this commandlet to connect to a CSP Partner just by using their tenant ID
@@ -13,7 +13,7 @@ Use this commandlet to connect to a CSP Partner just by using their tenant ID
 ## SYNTAX
 
 ```
-Connect-MSPToolboxPartner [-TenantID] <String> [<CommonParameters>]
+Connect-MSPPartner [-TenantID] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +23,7 @@ Use this commandlet to connect to a CSP Partner just by using their tenant ID
 
 ### Example 1
 ```powershell
-PS C:\> Connect-MSPToolBoxPartner -TenantID "12abc-*********************"
+PS C:\> Connect-MSPPartner -TenantID "12abc-*********************"
 ```
 
 ## PARAMETERS

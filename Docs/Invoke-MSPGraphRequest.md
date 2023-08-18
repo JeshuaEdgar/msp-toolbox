@@ -13,7 +13,7 @@ Invoke a Microsoft Graph request using the current connected tenant
 ## SYNTAX
 
 ```
-Invoke-MSPGraphRequest [-Endpoint] <String> [[-Method] <Object>] [[-Customer] <Boolean>] [[-Body] <Array>]
+Invoke-MSPGraphRequest [-Endpoint] <String> [[-Method] <Object>] [[-Customer] <Boolean>] [[-Body] <Hashtable>]
  [-Beta] [<CommonParameters>]
 ```
 
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 Accepts a hasthable as input
 
 ```yaml
-Type: Array
+Type: Hashtable
 Parameter Sets: (All)
 Aliases:
 

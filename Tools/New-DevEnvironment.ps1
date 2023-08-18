@@ -12,10 +12,10 @@ ForEach ($key in $devSettings.PSObject.Properties.Name) {
 Import-Module "$moduleRoot\MSPToolBox.psd1" -Force -Verbose
 
 $connectSplat = @{
-    ApplicationID     = $env:ApplicationID
+    ApplicationID     = $env:ApplicationId
     ApplicationSecret = $env:ApplicationSecret
-    Refreshtoken      = $env:Refreshtoken
-    TenantID          = $env:TenantID
+    Refreshtoken      = $env:RefreshToken
+    TenantID          = $env:TenantId
 }
 
 Connect-MSPToolbox @connectSplat -Verbose

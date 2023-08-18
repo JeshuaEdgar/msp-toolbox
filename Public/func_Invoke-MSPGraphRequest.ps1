@@ -42,7 +42,7 @@ function Invoke-MSPGraphRequest {
     }
 
     if (($null -eq $script:CustomerAuthHeader) -or ($Customer -eq $false)) {
-        Write-Verbose "You are not using a Partner token, please run 'Connect-MSPToolboxPartner' to connect to a Partner"
+        Write-Verbose "You are not using a Partner token, please run 'Connect-MSPPartner' to connect to a Partner"
         $reqSplat.Headers = $script:GraphAuthHeader
     }
 

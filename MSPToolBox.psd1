@@ -12,7 +12,7 @@
     RootModule        = 'MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.1.7'
+    ModuleVersion     = '1.0.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -71,7 +71,7 @@
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @(
         "Connect-MSPToolbox",
-        "Connect-MSPToolboxPartner",
+        "Connect-MSPPartner",
         "Get-MSPToolboxCurrentConnection",
         "Get-MSPToolboxPartnerList",
         "Invoke-MSPGraphRequest"
@@ -116,7 +116,7 @@
             ReleaseNotes = 'https://github.com/JeshuaEdgar/msp-toolbox/releases'
 
             # Prerelease string of this module
-            Prerelease   = 'beta'
+            # Prerelease   = 'beta'
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             # RequireLicenseAcceptance = $false
