@@ -27,6 +27,7 @@ try {
             }
         }
     }
+    New-Alias -Name "Connect-MSPToolboxPartner" -Value "Connect-MSPPartner" -Scope Global
 }
 catch {
     Write-Error ("{0}: {1}" -f $_.BaseName, $_.Exception.Message)
@@ -51,7 +52,7 @@ if ($module.version -ge [version]$minver) {
         Import-Module @importSplat
     }
     catch {
-        throw "Failed to import 'PartnerCenter': {0}" -f $_.Exception.Message
+        Write-Error "Failed to import 'PartnerCenter': {0}" -f $_.Exception.Message
     }
 }
 elseif ($module.version -lt [version]$minVer) {
@@ -60,7 +61,7 @@ elseif ($module.version -lt [version]$minVer) {
         Import-Module @importSplat
     }
     catch {
-        throw "Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message
+        Write-Error "Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message
     }
 }
 else {
@@ -69,6 +70,6 @@ else {
         Import-Module @importSplat
     }
     catch {
-        throw "Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message
+        Write-Error "Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message
     }
 }

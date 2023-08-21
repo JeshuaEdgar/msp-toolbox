@@ -4,7 +4,7 @@ function Invoke-MSPGraphRequest {
         [parameter (Mandatory = $true)][string]$Endpoint,
         [parameter (Mandatory = $false)][ValidateSet("Delete", "Get", "Patch", "Post", "Put")]$Method = "Get",
         [bool]$Customer = $true,
-        [hashtable]$Body,
+        $Body,
         [switch]$Beta
     )
     Test-MSPToolboxConnection
@@ -24,8 +24,11 @@ function Invoke-MSPGraphRequest {
         URI     = $baseUrl + $Endpoint
         Headers = $script:CustomerAuthHeader
     }
-    if ($Body -is [hashtable]) {
+    if ($Body -is [hashtable] -or [pscustomobject]) {
         $reqSplat.Body += $Body | ConvertTo-Json -Depth 5
+    }
+    elseif ($Body) {
+        Write-Warning "Body is not of type [hashtable] or [PsCustomObject]"
     }
 
     $reqSplat.GetEnumerator() | ForEach-Object {

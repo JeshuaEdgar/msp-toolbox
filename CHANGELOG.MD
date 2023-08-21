@@ -1,3 +1,14 @@
+# [1.0.1]
+
+## Fixed
+
+- Accept `[hashtable]` and `[pscustomobject]` on `Invoke-MSPGraphRequest`
+- `Write-Error` is the default method for handling errors now 
+
+## Added
+
+- Alias for `Connect-MSPPartner`: `Connect-MSPToolboxPartner`
+
 # [1.0.0]
 
 This marks the first non-prerelease version of MSPToolbox! I feel like this version is production ready. Must there be any problems you are facing please don't hesitate to make an issue request. Please read the changelog below for previous versions. For this first non-prerelease version the following has been changed/added:

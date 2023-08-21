@@ -20,10 +20,10 @@ function Connect-MSPPartner {
             Write-Verbose ("Connected to tenant {0}" -f $organisationCheck.displayName)
         }
         catch {
-            throw (Format-ErrorCode $_).ErrorMessage
+            Write-Error (Format-ErrorCode $_).ErrorMessage
         }
     }
     catch {
-        throw (Format-ErrorCode $_).ErrorMessage
+        Write-Error (Format-ErrorCode $_).ErrorMessage
     }
 }

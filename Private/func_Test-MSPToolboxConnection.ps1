@@ -4,7 +4,7 @@ function Test-MSPToolboxConnection {
     
     if ([string]::IsNullOrEmpty($script:mspToolBoxSession.GraphAuthHeader)) {
         if ($functionCallStack -notin $functionExceptions) {
-            throw "Please connect to OpenProvider first using: 'Connect-MSPToolbox'"
+            Write-Error "Please connect to OpenProvider first using: 'Connect-MSPToolbox'"
         }
     }
 }
