@@ -36,6 +36,7 @@ catch {
 
 # dependencies
 $module = Get-Module -ListAvailable PartnerCenter
+$loadedModule = Get-Module PartnerCenter
 $minVer = "3.0.10"
 $importSplat = @{
     Name           = "PartnerCenter"
@@ -46,30 +47,31 @@ $importSplat = @{
 if ($PSVersionTable.PSEdition -eq "Core" -and $IsWindows -eq $true) { 
     $importSplat.SkipEditionCheck = $true
 }
-
-if ($module.version -ge [version]$minver) {
-    try {
-        Import-Module @importSplat
+if (-not ($loadedModule.Version -ge [version]$minVer)) {
+    if ($module.version -ge [version]$minver) {
+        try {
+            Import-Module @importSplat
+        }
+        catch {
+            Write-Error ("Failed to import 'PartnerCenter': {0}" -f $_.Exception.Message)
+        }
     }
-    catch {
-        Write-Error "Failed to import 'PartnerCenter': {0}" -f $_.Exception.Message
+    elseif ($module.version -lt [version]$minVer) {
+        try {
+            Update-Module PartnerCenter -Force
+            Import-Module @importSplat
+        }
+        catch {
+            Write-Error ("Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message)
+        }
     }
-}
-elseif ($module.version -lt [version]$minVer) {
-    try {
-        Update-Module PartnerCenter -Force
-        Import-Module @importSplat
-    }
-    catch {
-        Write-Error "Failed to update 'PartnerCenter': {0}" -f $_.Exception.Message
-    }
-}
-else {
-    try {
-        Install-Module PartnerCenter -MinimumVersion $minver
-        Import-Module @importSplat
-    }
-    catch {
-        Write-Error "Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message
+    else {
+        try {
+            Install-Module PartnerCenter -MinimumVersion $minver
+            Import-Module @importSplat
+        }
+        catch {
+            Write-Error ("Module 'PartnerCenter' is not present, tried installing but raised an error: {0}" -f $_.Exception.Message)
+        }
     }
 }
