@@ -4,32 +4,39 @@ function Format-ErrorCode {
         [parameter(Mandatory = $true)]
         $ErrorObject
     )
-
     try {
-        $httpError = $ErrorObject.Exception.Response.StatusCode.value__ #http error code (universal)
-
-        switch ($PSVersionTable.PSEdition) {
-            "Desktop" {
-                $ErrorObject = New-Object System.IO.StreamReader($ErrorObject.Exception.Response.GetResponseStream())
-                $ErrorObject.BaseStream.Position = 0 
-                $ErrorObject.DiscardBufferedData() 
-                $ErrorObject = $ErrorObject.ReadToEnd()
+        # Verbose output to generate debuggin info
+        Write-Debug "Error full exception type: $($ErrorObject.Exception.GetType().FullName)"
+        Write-Debug "Error message: $($ErrorObject.Exception.Message)"
+        if ($ErrorObject.Exception -is [Microsoft.PowerShell.Commands.HttpResponseException]) {
+            switch ($PSVersionTable.PSEdition) {
+                "Desktop" {
+                    $ErrorObject = New-Object System.IO.StreamReader($ErrorObject.Exception.Response.GetResponseStream())
+                    $ErrorObject.BaseStream.Position = 0 
+                    $ErrorObject.DiscardBufferedData() 
+                    $ErrorObject = $ErrorObject.ReadToEnd()
+                }
+                "Core" { $ErrorObject = $ErrorObject.ErrorDetails.Message }
             }
-            "Core" { $ErrorObject = $ErrorObject.ErrorDetails.Message }
+            $errorJson = $ErrorObject | ConvertFrom-Json
+            # getting token error
+            if ($errorJson.error) {
+                return $errorJson.error_description
+            }
+            # graph error
+            elseif ($errorJson.error.message) {
+                return "Error $($errorJson.error.code)! $($errorJson.error.message)"
+            }
+            # else return just the error
+            else {
+                return $errorJson
+            }
         }
-
-        $errorCode = (($ErrorObject | ConvertFrom-Json).error.code)
-        $errorDesc = (($ErrorObject | ConvertFrom-Json).error.message)
-
-        $return_object = [PSCustomObject]@{
-            GraphErrorCode    = $errorCode
-            GraphErrorMessage = $errorDesc
-            HttpErrorCode     = $httpError
-            ErrorMessage      = [string]"Error $errorCode! $errorDesc"
+        else {
+            return $ErrorObject.Exception.Message
         }
-        return $return_object
     }
     catch {
-        Write-Error $ErrorObject.Exception.Message
+        return $_.Exception.Message
     }
 }

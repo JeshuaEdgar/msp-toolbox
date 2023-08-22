@@ -1,3 +1,15 @@
+# [1.1.0]
+
+## Removed
+
+- Dependencies! Module is now independant, switched `New-PartnerAccessToken` for `Invoke-RestMethod`'s
+    - With this comes a drastic improvement on speed when connecting to multiple tenants
+
+## Added
+
+- Debugging mode in tools and other cmdlets
+- Check if tokens are about to expire, if so generate new ones
+
 # [1.0.1]
 
 ## Fixed

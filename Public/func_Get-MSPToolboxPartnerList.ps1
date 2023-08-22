@@ -4,12 +4,12 @@ function Get-MSPToolboxPartnerList {
         $customerSplat = @{
             Method = "Get"
             URI    = "https://graph.microsoft.com/beta/contracts?`$top=999"
-            Header = $script:mspToolBoxSession.GraphAuthHeader
+            Header = $script:mspToolBoxSession.MSPAuthHeader
         }
         $customers = Invoke-RestMethod @customerSplat
         return [PSCustomObject]$customers.value
     }
     catch {
-        (Format-ErrorCode $_).ErrorMessage
+        Write-Error (Format-ErrorCode $_)
     }    
 }

@@ -12,7 +12,7 @@
     RootModule        = 'MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.1'
+    ModuleVersion     = '1.1.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -104,10 +104,10 @@
             Tags         = @("Graph", "Partner", "Center", "Secure", "App", "Model", "MSP")
 
             # A URL to the license for this module.
-            LicenseUri   = 'https://github.com/JeshuaEdgar/MSPToolbox/blob/development/LICENSE'
+            LicenseUri   = 'https://github.com/JeshuaEdgar/msp-toolbox/blob/master/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri   = 'https://github.com/JeshuaEdgar/MSPToolbox'
+            ProjectUri   = 'https://github.com/JeshuaEdgar/msp-toolbox'
 
             # A URL to an icon representing this module.
             # IconUri = ''

@@ -33,20 +33,24 @@ function Invoke-MSPGraphRequest {
 
     $reqSplat.GetEnumerator() | ForEach-Object {
         if ($_.Value -is [System.Collections.Hashtable]) {
+            Write-Debug "               Body"
             $_.Value.GetEnumerator() | ForEach-Object {
-                Write-Verbose "Parameter : $($_.Key)"
-                Write-Verbose "Value     : $($_.Value)"
+                if ($_.Key -eq "Authorization") {
+                    $_.Value = ($_.Value.Substring(0, 31) + "...")
+                }
+                Write-Debug "Body Key     : $($_.Key)"
+                Write-Debug "Body Value   : $($_.Value)"
             }
         }
         else {
-            Write-Verbose "Parameter : $($_.Key)"
-            Write-Verbose "Value     : $($_.Value)"
+            Write-Debug "Param Key    : $($_.Key)"
+            Write-Debug "Param Value  : $($_.Value)"
         }
     }
 
     if (($null -eq $script:CustomerAuthHeader) -or ($Customer -eq $false)) {
-        Write-Verbose "You are not using a Partner token, please run 'Connect-MSPPartner' to connect to a Partner"
-        $reqSplat.Headers = $script:GraphAuthHeader
+        Write-Debug "You are not using a Partner token, please run 'Connect-MSPPartner' to connect to a Partner"
+        $reqSplat.Headers = $script:MSPAuthHeader
     }
 
     # internal function
@@ -71,6 +75,6 @@ function Invoke-MSPGraphRequest {
         return $output
     }
     catch {
-        Write-Error (Format-ErrorCode $_).ErrorMessage
+        Write-Error (Format-ErrorCode $_)
     }
 }

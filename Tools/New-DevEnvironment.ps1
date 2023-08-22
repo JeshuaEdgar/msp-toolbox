@@ -9,7 +9,7 @@ ForEach ($key in $devSettings.PSObject.Properties.Name) {
     }
 }
 
-Import-Module "$moduleRoot\MSPToolBox.psd1" -Force -Verbose
+Import-Module "$moduleRoot\MSPToolBox.psd1" -Force
 
 $connectSplat = @{
     ApplicationID     = $env:ApplicationId
@@ -18,4 +18,10 @@ $connectSplat = @{
     TenantID          = $env:TenantId
 }
 
-Connect-MSPToolbox @connectSplat -Verbose
+Connect-MSPToolbox @connectSplat
+
+$randomPartners = Get-MSPToolboxPartnerList | Get-Random -Count 5
+
+foreach ($partner in $randomPartners) {
+    Connect-MSPPartner -TenantID $partner.customerId
+}
