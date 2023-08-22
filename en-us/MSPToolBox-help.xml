@@ -401,9 +401,9 @@
           <maml:description>
             <maml:para>Accepts a hasthable as input</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
-            <maml:name>Hashtable</maml:name>
+            <maml:name>Object</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -439,9 +439,9 @@
         <maml:description>
           <maml:para>Accepts a hasthable as input</maml:para>
         </maml:description>
-        <command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
-          <maml:name>Hashtable</maml:name>
+          <maml:name>Object</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
