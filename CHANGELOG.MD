@@ -1,3 +1,14 @@
+# [1.1.1]
+
+## Added
+
+- Reading out permissions with the `-Debug` switch on `Connect-MSPToolbox` and `Connect-MSPPartner`
+- Optional parameter `-Scope` was added to `Connect-MSPPartner`, by default this is `https://graph.microsoft.com/.default`
+
+## Changed
+
+- `-Customer [bool]` is now `-AsMSP [switch]` on `Invoke-MSPGraphRequest`. Simply add this switch if you want to run a command on the MSP tenant
+
 # [1.1.0]
 
 ## Removed
