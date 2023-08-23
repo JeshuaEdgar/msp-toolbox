@@ -6,8 +6,8 @@ function Format-ErrorCode {
     )
     try {
         # Verbose output to generate debuggin info
-        Write-Debug "Error full exception type: $($ErrorObject.Exception.GetType().FullName)"
-        Write-Debug "Error message: $($ErrorObject.Exception.Message)"
+        Write-Debug "MSPToolbox | Error full exception type: $($ErrorObject.Exception.GetType().FullName)"
+        Write-Debug "MSPToolbox | Error message: $($ErrorObject.Exception.Message)"
         if ($ErrorObject.Exception -is [Microsoft.PowerShell.Commands.HttpResponseException]) {
             switch ($PSVersionTable.PSEdition) {
                 "Desktop" {
