@@ -12,24 +12,29 @@ function Format-ErrorCode {
             switch ($PSVersionTable.PSEdition) {
                 "Desktop" {
                     $ErrorObject = New-Object System.IO.StreamReader($ErrorObject.Exception.Response.GetResponseStream())
-                    $ErrorObject.BaseStream.Position = 0 
-                    $ErrorObject.DiscardBufferedData() 
+                    $ErrorObject.BaseStream.Position = 0
+                    $ErrorObject.DiscardBufferedData()
                     $ErrorObject = $ErrorObject.ReadToEnd()
                 }
                 "Core" { $ErrorObject = $ErrorObject.ErrorDetails.Message }
             }
-            $errorJson = $ErrorObject | ConvertFrom-Json
-            # getting token error
-            if ($errorJson.error) {
-                return $errorJson.error_description
+            try {
+                $errorJson = $ErrorObject | ConvertFrom-Json
+                # token error
+                if ($errorJson.PsObject.Properties.Match('error_description')) {
+                    return $errorJson.error_description
+                }
+                # graph error
+                elseif ($errorJson.PsObject.Properties.Match('error')) {
+                    return "$($errorJson.error.code): $($errorJson.error.message)"
+                }
+                # else return just the error
+                else {
+                    return $errorJson
+                }
             }
-            # graph error
-            elseif ($errorJson.error.message) {
-                return "Error $($errorJson.error.code)! $($errorJson.error.message)"
-            }
-            # else return just the error
-            else {
-                return $errorJson
+            catch {
+                return "Error converting from JSON. Original error: $($ErrorObject.Exception.Message)"
             }
         }
         else {
