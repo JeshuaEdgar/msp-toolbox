@@ -3,7 +3,6 @@ function Invoke-MSPGraphRequest {
         [CmdletBinding()]
         [parameter (Mandatory = $true)][string]$Endpoint,
         [parameter (Mandatory = $false)][ValidateSet("Delete", "Get", "Patch", "Post", "Put")]$Method = "Get",
-        [switch]$AsMSP,
         $Body,
         [switch]$Beta
     )
@@ -33,7 +32,7 @@ function Invoke-MSPGraphRequest {
 
     $reqSplat.GetEnumerator() | ForEach-Object {
         if ($_.Value -is [System.Collections.Hashtable]) {
-            Write-Debug "MSPToolbox |                Body Values"
+            Write-Debug "MSPToolbox | -------------- Body Values"
             $_.Value.GetEnumerator() | ForEach-Object {
                 if ($_.Key -eq "Authorization") {
                     $_.Value = ($_.Value.Substring(0, 31) + "..." + ($_.value.Substring($_.value.length - 16)))
@@ -48,12 +47,8 @@ function Invoke-MSPGraphRequest {
         }
     }
 
-    if (($null -eq $script:CustomerAuthHeader) -and ($AsMSP -eq $false)) {
-        Write-Error "MSPToolbox | You are not connected to a Partner, please run 'Connect-MSPPartner' to connect to a Partner or use '`-AsMSP' to run the Graph Request under the MSP tenant"
-        return
-    }
-    elseif ($AsMSP) {
-        $reqSplat.Headers = $script:MSPAuthHeader
+    if ($null -eq $script:CustomerAuthHeader) {
+        throw "MSPToolbox | You are not connected to a Partner, please run 'Connect-MSPPartner' to connect to a Partner or use '`-AsMSP' to run the Graph Request under the MSP tenant"
     }
 
     # internal function
