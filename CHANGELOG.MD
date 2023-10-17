@@ -1,3 +1,29 @@
+## [1.2.0-unreleased]
+
+## Changed
+
+### Breaking change!
+`Connect-MSPToolbox` no longer accepts plaintext input for the following parameters:
+- `-ApplicationSecret`
+- `-RefreshToken`
+
+Please add `| ConvertTo-SecureString -AsPlainText -Force` at the end of your secrets in your script (for example from AZ Keyvault) and you should be good to go.
+
+## Added
+
+- New cmdlet `Grant-CSPApplication`
+    - This will grant your CSP application across all your managed tenants, if the app is already present in the tenant it will remove the application and grant it again, this is useful when you need to update the permissions since those won't be copied over anymore.
+    - Optional parameter `-CustomerTenantID` for when you want to
+    - Example can be found in the [examples section](/README.md#examples)
+
+## Fixed
+
+- Error formatting/output is greatly enhanced, if you are still experiencing issues please open an issue
+
+## Removed
+- `Invoke-MSPGraphRequest`
+    - `-AsMSP` switch is removed.
+
 # [1.1.1]
 
 ## Added
