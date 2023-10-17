@@ -4,20 +4,27 @@ function Connect-MSPToolbox {
         [parameter(Mandatory = $true)]
         [string]$ApplicationID,
         [parameter(Mandatory = $true)]
-        [string]$ApplicationSecret,
+        [SecureString]$ApplicationSecret,
         [parameter(Mandatory = $true)]
-        [string]$Refreshtoken,
+        [SecureString]$Refreshtoken,
         [parameter(Mandatory = $true)]
         [string]$TenantID
     )
     $ErrorActionPreference = "Stop"
+    # internal function to decode passwords
+    function Decode-SecureString($secureString) {
+        $Ptr = [System.Runtime.InteropServices.Marshal]::SecureStringToCoTaskMemUnicode($secureString)
+        $result = [System.Runtime.InteropServices.Marshal]::PtrToStringUni($Ptr)
+        [System.Runtime.InteropServices.Marshal]::ZeroFreeCoTaskMemUnicode($Ptr)
+        return [string]$result 
+    }
     try {
         Test-MSPToolboxConnection
         Write-Debug "MSPToolbox | MSPToolBox | Connecting with Microsoft CSP with given values..."
         $graphBody = @{
             client_id     = $ApplicationID
-            client_secret = $ApplicationSecret
-            refresh_token = $Refreshtoken
+            client_secret = (Decode-SecureString $ApplicationSecret)
+            refresh_token = (Decode-SecureString $Refreshtoken)
             scope         = "https://graph.microsoft.com/.default"
             grant_type    = "refresh_token"
         }
@@ -40,8 +47,8 @@ function Connect-MSPToolbox {
         if (($customers.value).count -ge 1) {
             # set variables after confirmation of validity
             $script:mspToolBoxSession.ApplicationID = $ApplicationID
-            $script:mspToolBoxSession.ApplicationSecret = $ApplicationSecret
-            $script:mspToolBoxSession.Refreshtoken = $Refreshtoken
+            $script:mspToolBoxSession.ApplicationSecret = (Decode-SecureString $ApplicationSecret)
+            $script:mspToolBoxSession.Refreshtoken = (Decode-SecureString $Refreshtoken)
             $script:mspToolBoxSession.TenantID = $TenantID
             $script:mspToolBoxSession.MSPAuthHeader = $authHeader
             $script:mspToolBoxSession.MSPTokenExpiry = [datetime](Get-Date).AddSeconds($graphToken.expires_in)
