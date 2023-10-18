@@ -1,4 +1,4 @@
-## [1.2.0-unreleased]
+## [1.2.0]
 
 ## Changed
 
@@ -11,18 +11,15 @@ Please add `| ConvertTo-SecureString -AsPlainText -Force` at the end of your sec
 
 ## Added
 
-- New cmdlet `Grant-CSPApplication`
+- New cmdlet `Grant-CSPApplication` !
     - This will grant your CSP application across all your managed tenants, if the app is already present in the tenant it will remove the application and grant it again, this is useful when you need to update the permissions since those won't be copied over anymore.
-    - Optional parameter `-CustomerTenantID` for when you want to
+    - Optional parameter `-CustomerTenantID` for when you want to run it on just one tenant.
     - Example can be found in the [examples section](/README.md#examples)
+- Debugging on all cmdlet's to help troubleshoot + a new internal debug printer
 
 ## Fixed
 
 - Error formatting/output is greatly enhanced, if you are still experiencing issues please open an issue
-
-## Removed
-- `Invoke-MSPGraphRequest`
-    - `-AsMSP` switch is removed.
 
 # [1.1.1]
 
