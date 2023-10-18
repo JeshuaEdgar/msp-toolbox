@@ -20,7 +20,7 @@ function Connect-MSPToolbox {
     }
     try {
         Test-MSPToolboxConnection
-        Write-Debug "MSPToolbox | MSPToolBox | Connecting with Microsoft CSP with given values..."
+        New-DebugLine "Connecting with Microsoft CSP with given values..."
         $graphBody = @{
             client_id     = $ApplicationID
             client_secret = (Decode-SecureString $ApplicationSecret)
@@ -31,11 +31,10 @@ function Connect-MSPToolbox {
         $graphToken = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$($TenantID)/oauth2/v2.0/token" -Body $graphBody
         $authHeader = @{ Authorization = "Bearer $($graphToken.access_token)"; "Content-Type" = "application/json" }
 
-        Write-Debug "MSPToolbox | MSPToolBox | Checking connection and functionalities..."
-        Write-Debug $graphToken.access_token
+        New-DebugLine "Checking connection and functionalities..."
         $permissions = Read-JwtTokenPermissions -Token $graphToken.access_token
-        Write-Debug "MSPToolbox | MSPToolbox | Appliaction has following permissions:"
-        $permissions | foreach { Write-Debug $_ }
+        New-DebugLine "Appliaction has following permissions:"
+        $permissions | foreach { New-DebugLine $_ }
         $customerSplat = @{
             Method = "Get"
             URI    = "https://graph.microsoft.com/beta/contracts"
@@ -43,7 +42,7 @@ function Connect-MSPToolbox {
         }
         $customers = Invoke-RestMethod @customerSplat
 
-        Write-Debug "MSPToolbox | MSPToolBox | Verifying customers..."
+        New-DebugLine "Verifying customers..."
         if (($customers.value).count -ge 1) {
             # set variables after confirmation of validity
             $script:mspToolBoxSession.ApplicationID = $ApplicationID
@@ -52,10 +51,10 @@ function Connect-MSPToolbox {
             $script:mspToolBoxSession.TenantID = $TenantID
             $script:mspToolBoxSession.MSPAuthHeader = $authHeader
             $script:mspToolBoxSession.MSPTokenExpiry = [datetime](Get-Date).AddSeconds($graphToken.expires_in)
-            Write-Debug "MSPToolbox | MSPToolBox | Connected!"
+            New-DebugLine "Connected!"
         }
         else {
-            Write-Debug "MSPToolbox | MSPToolBox | Oops! No customers found, check logs/error messsages for debugging"
+            New-DebugLine "Oops! No customers found, check logs/error messsages for debugging"
         }
     }
     catch {
