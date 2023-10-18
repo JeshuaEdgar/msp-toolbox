@@ -16,10 +16,10 @@ function Connect-MSPPartner {
     }
     try {
         $customerTokenRequest = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$($TenantID)/oauth2/v2.0/token" -Body $customerTokenSplat
-        $script:CustomerAuthHeader = @{ Authorization = "Bearer $($customerTokenRequest.access_token)"; "Content-Type" = "application/json" }
-        Write-Debug "MSPToolbox | Checking permissions on tenant level..."
+        $script:mspToolBoxSession.CustomerAuthHeader = @{ Authorization = "Bearer $($customerTokenRequest.access_token)"; "Content-Type" = "application/json" }
+        New-DebugLine "Checking permissions on tenant level..."
         $permissions = Read-JwtTokenPermissions $customerTokenRequest.access_token
-        $permissions | foreach { Write-Debug $_ }
+        $permissions | foreach { New-DebugLine $_ }
         # checking one graph request with new token
         $organisationCheck = Invoke-MSPGraphRequest -Method Get -Endpoint "organization"
         $script:mspToolBoxSession.ConnectedTenant = $organisationCheck.displayName
