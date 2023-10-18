@@ -13,7 +13,7 @@ Use this commandlet to connect to a CSP Partner just by using their tenant ID
 ## SYNTAX
 
 ```
-Connect-MSPPartner [-TenantID] <String> [<CommonParameters>]
+Connect-MSPPartner [-TenantID] <String> [-Scope <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,6 +38,21 @@ Aliases:
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Scope
+Fill a custom scope in if necessary, default is "https://graph.microsoft.com/.default"
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

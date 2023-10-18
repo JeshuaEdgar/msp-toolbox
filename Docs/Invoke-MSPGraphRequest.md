@@ -13,8 +13,8 @@ Invoke a Microsoft Graph request using the current connected tenant
 ## SYNTAX
 
 ```
-Invoke-MSPGraphRequest [-Endpoint] <String> [[-Method] <Object>] [[-Customer] <Boolean>] [[-Body] <Object>]
- [-Beta] [<CommonParameters>]
+Invoke-MSPGraphRequest [-Endpoint] <String> [[-Method] <Object>] [-AsMSP] [[-Body] <Object>] [-Beta]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -73,21 +73,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Customer
-Optional boolean if you want to run a graph request on the customer or on the parent tenant. By default this is set to $true
-
-```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Endpoint
 The endpoint of the Graph call, this can be found in most of the documentation found on https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0
 
@@ -115,6 +100,21 @@ Accepted values: Delete, Get, Patch, Post, Put
 Required: False
 Position: 1
 Default value: Get
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AsMSP
+Run the following Graph request as the MSP tenant
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
