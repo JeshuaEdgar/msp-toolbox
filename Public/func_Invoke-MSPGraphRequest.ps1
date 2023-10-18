@@ -4,24 +4,23 @@ function Invoke-MSPGraphRequest {
         [parameter (Mandatory = $true)][string]$Endpoint,
         [parameter (Mandatory = $false)][ValidateSet("Delete", "Get", "Patch", "Post", "Put")]$Method = "Get",
         $Body,
-        [switch]$Beta
+        [switch]$Beta,
+        [switch]$AsMSP
     )
+    # checks before connection
     Test-MSPToolboxConnection
-
-    if ($Beta) {
-        $baseURL = "https://graph.microsoft.com/{0}/" -f "beta"
-    }
-    else {
-        $baseURL = "https://graph.microsoft.com/{0}/" -f "v1.0"
+    if (($null -eq $script:mspToolBoxSession.CustomerAuthHeader) -and (-not $AsMSP)) {
+        throw "MSPToolbox | You are not connected to a Partner, please run 'Connect-MSPPartner' to connect to a Partner or use '`-MSP' to run the Graph Request under the MSP tenant"
     }
 
+    # build the request
+    if ($Beta) { $baseURL = "https://graph.microsoft.com/{0}/" -f "beta" }
+    else { $baseURL = "https://graph.microsoft.com/{0}/" -f "v1.0" }
     if ($Endpoint.StartsWith("/")) { $Endpoint = $Endpoint.Substring(1) }
-
-    #create the splat first
     $reqSplat = @{
         Method  = $Method
         URI     = $baseUrl + $Endpoint
-        Headers = $script:CustomerAuthHeader
+        Headers = $script:mspToolBoxSession.CustomerAuthHeader
     }
     if ($Body -is [hashtable] -or [pscustomobject]) {
         $reqSplat.Body += $Body | ConvertTo-Json -Depth 5
@@ -29,26 +28,27 @@ function Invoke-MSPGraphRequest {
     elseif ($Body) {
         Write-Warning "Body is not of type [hashtable] or [PsCustomObject]"
     }
+    if ($AsMSP) {
+        $reqSplat.Headers = $script:mspToolBoxSession.MSPAuthHeader
+        New-DebugLine "Running as MSP"
+    }
 
+    # debugging
     $reqSplat.GetEnumerator() | ForEach-Object {
         if ($_.Value -is [System.Collections.Hashtable]) {
-            Write-Debug "MSPToolbox | -------------- Body Values"
+            New-DebugLine "-------------- Body Values"
             $_.Value.GetEnumerator() | ForEach-Object {
                 if ($_.Key -eq "Authorization") {
                     $_.Value = ($_.Value.Substring(0, 31) + "..." + ($_.value.Substring($_.value.length - 16)))
                 }
-                Write-Debug "MSPToolbox | Body Key     : $($_.Key)"
-                Write-Debug "MSPToolbox | Body Value   : $($_.Value)"
+                New-DebugLine "Body Key     : $($_.Key)"
+                New-DebugLine "Body Value   : $($_.Value)"
             }
         }
         else {
-            Write-Debug "MSPToolbox | Param Key    : $($_.Key)"
-            Write-Debug "MSPToolbox | Param Value  : $($_.Value)"
+            New-DebugLine "Param Key    : $($_.Key)"
+            New-DebugLine "Param Value  : $($_.Value)"
         }
-    }
-
-    if ($null -eq $script:CustomerAuthHeader) {
-        throw "MSPToolbox | You are not connected to a Partner, please run 'Connect-MSPPartner' to connect to a Partner or use '`-AsMSP' to run the Graph Request under the MSP tenant"
     }
 
     # internal function
@@ -64,7 +64,7 @@ function Invoke-MSPGraphRequest {
         $output += (Check-OutputData $request)
         if ($request.'@odata.nextLink') {
             do {
-                $request = Invoke-RestMethod $request.'@odata.nextLink' -Headers $script:CustomerAuthHeader 
+                $request = Invoke-RestMethod $request.'@odata.nextLink' -Headers $script:mspToolBoxSession.CustomerAuthHeader 
                 $output += (Check-OutputData $request)
             } until (
                 (-not $request.'@odata.nextLink')
