@@ -53,7 +53,7 @@ function Grant-CSPApplication {
     }
     # get application permissions and build the consent body
     try {
-        if($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status "Getting and building application consent body..." }
+        if ($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status "Getting and building application consent body..." }
 
         $appInformation = Invoke-MSPGraphRequest -Endpoint ("applications(appId='{0}')" -f $script:mspToolBoxSession.ApplicationId) -AsMSP
         New-DebugLine "Got application information"
@@ -63,7 +63,7 @@ function Grant-CSPApplication {
 
         $bodyBuilder = @()
         foreach ($resourceApp in $requiredResource) {
-            if($progress -eq $true){ Write-Progress -Activity "Granting Application Permissions" -Status ("Getting enterprise application permissions for app {0}" -f $resourceApp.resourceAppId) -PercentComplete (([array]::IndexOf($requiredResource, $resourceApp) / $requiredResource.Count) * 100)}
+            if ($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status ("Getting enterprise application permissions for app {0}" -f $resourceApp.resourceAppId) -PercentComplete (([array]::IndexOf($requiredResource, $resourceApp) / $requiredResource.Count) * 100) }
             New-DebugLine ("Getting enterprise application permissions for app {0}" -f $resourceApp.resourceAppId)
             $enterPriseAppPermissions = Invoke-MSPGraphRequest -Endpoint ("servicePrincipals?`$filter=appid eq '{0}'&`$select=oauth2PermissionScopes" -f $resourceApp.resourceAppId) -AsMSP | Select-Object -ExpandProperty oauth2PermissionScopes
             [pscustomobject]$applicationAndRoles = @{
@@ -95,7 +95,7 @@ function Grant-CSPApplication {
 
     # loop through all customer(s)
     foreach ($customer in $CustomerTenantID) {
-        if ($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status "Granting $([array]::IndexOf($CustomerTenantID, $customer))/$($CustomerTenantID.Count)..." -PercentComplete (([array]::IndexOf($CustomerTenantID, $customer) / $CustomerTenantID.Count) * 100) }
+        if ($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status "Granting $([array]::IndexOf($CustomerTenantID, $customer))/$($CustomerTenantID.Count)..." -PercentComplete ((([array]::IndexOf($CustomerTenantID, $customer)) / $CustomerTenantID.Count) * 100) }
         # Remove any existing Grants
         New-DebugLine "Processing tenantID $customer"
         try {
