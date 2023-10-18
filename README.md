@@ -84,12 +84,19 @@ This requires the delegated permission `user_impersonation` from the Microsoft P
 
 First of all make sure you connect with `Connect-MSPToolbox`, this is necesary. Since the information of your application you want to grant is stored within the session of the module no need to use any refresh tokens or application secrets.
 
+Note: it is okay for some of your tenants to fail, keep an eye on the error messages. The tenant ID will be outputted in these errors for you to investigate these.
+
 ```powershell
 # For all your tenants
 Grant-CSPApplication
 
-# Output:
-# Granting Application Permissions [Granting 38/394...                                                                 ]
+# Output (while running):
+Granting Application Permissions [Granting 38/394...   ]
+
+# Output (when finished):
+Success Failed                                                                                                          
+------- ------                                                                                                          
+    374     20
 
 # For a specific tenant
 Grant-CSPApplication -CustomerTenantID "6babcaad-604b-40ac-a9d7-9fd97c0b779f"
