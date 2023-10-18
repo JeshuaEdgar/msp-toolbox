@@ -6,7 +6,7 @@ function Test-MSPToolboxConnection {
     
     if ($functionCallStack -notin $functionExceptions) {
         if ([string]::IsNullOrEmpty($sessionData.MSPAuthHeader)) {
-            Write-Error "Please connect to OpenProvider first using: 'Connect-MSPToolbox'"
+            Write-Error "Please connect first using: 'Connect-MSPToolbox'"
         }
         if (-not [string]::IsNullOrEmpty($sessionData.CustomerTokenExpiry)) {
             if ($sessionData.CustomerTokenExpiry -lt (Get-Date).AddMinutes(-15)) {
