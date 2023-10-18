@@ -20,6 +20,7 @@ Please add `| ConvertTo-SecureString -AsPlainText -Force` at the end of your sec
 ## Fixed
 
 - Error formatting/output is greatly enhanced, if you are still experiencing issues please open an issue
+- `GetMSPToolboxPartnerList` now uses `Invoke-MSPGraphRequest`
 
 # [1.1.1]
 
