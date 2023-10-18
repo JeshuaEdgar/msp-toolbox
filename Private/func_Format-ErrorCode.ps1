@@ -6,8 +6,8 @@ function Format-ErrorCode {
     )
     try {
         # Verbose output to generate debuggin info
-        Write-Debug "MSPToolbox | Error full exception type: $($ErrorObject.Exception.GetType().FullName)"
-        Write-Debug "MSPToolbox | Error message: $($ErrorObject.Exception.Message)"
+        New-DebugLine "Error full exception type: $($ErrorObject.Exception.GetType().FullName)"
+        New-DebugLine "Error message: $($ErrorObject.Exception.Message)"
         if ($ErrorObject.Exception -is [Microsoft.PowerShell.Commands.HttpResponseException]) {
             switch ($PSVersionTable.PSEdition) {
                 "Desktop" {
@@ -20,18 +20,30 @@ function Format-ErrorCode {
             }
             try {
                 $errorJson = $ErrorObject | ConvertFrom-Json
-                # token error
-                if ($errorJson.PsObject.Properties.Match('error_description')) {
-                    return $errorJson.error_description
-                }
-                # graph error
-                elseif ($errorJson.PsObject.Properties.Match('error')) {
-                    return "$($errorJson.error.code): $($errorJson.error.message)"
+                New-DebugLine "Converted JSON out of error object"
+
+                # debug properties
+                $errorJson.PsObject.Properties | foreach { New-DebugLine $_ }
+
+                # testing the output
+                if ($null -ne $errorJson.error_description) { return $errorJson.error_description }
+                if ($null -ne $errorJson.error.code -and $null -ne $errorJson.error.message) { return "$($errorJson.error.code): $($errorJson.error.message)" }
+                if ($null -ne $errorJson.message) { 
+                    try {
+                        $parsed = ConvertFrom-Json $errorJson.message
+                        if ($null -ne $parsed.'odata.error'.code) {
+                            return "$($parsed.'odata.error'.code). $($parsed.'odata.error'.message.value)"
+                        }
+                        else {
+                            return $errorJson.message
+                        }
+                    }
+                    catch {
+                        return $errorJson.message
+                    }
                 }
                 # else return just the error
-                else {
-                    return $errorJson
-                }
+                else { return $errorJson }
             }
             catch {
                 return "Error converting from JSON. Original error: $($ErrorObject.Exception.Message)"
