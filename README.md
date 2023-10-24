@@ -1,6 +1,6 @@
 # MSPToolBox
 
-![PSGalleryVersion](https://img.shields.io/powershellgallery/v/MSPToolBox?style=flat-square) ![PSGalleryDownloads](https://img.shields.io/powershellgallery/dt/MSPToolBox?style=flat-square)
+[![PSGalleryVersion](https://img.shields.io/powershellgallery/v/MSPToolBox?style=flat-square)](https://www.powershellgallery.com/packages/MSPToolbox/) [![PSGalleryDownloads](https://img.shields.io/powershellgallery/dt/MSPToolBox?style=flat-square)](https://www.powershellgallery.com/packages/MSPToolbox/)
 
 Created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/connect-to-exchange-online-automated-when-mfa-is-enabled-using-the-secureapp-model/) and the PartnerCenter module for multi-tenant scripting. See below for some [example(s)](#examples) on how to use it.
 
