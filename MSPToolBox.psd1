@@ -112,7 +112,7 @@
             ProjectUri   = 'https://github.com/JeshuaEdgar/msp-toolbox'
 
             # A URL to an icon representing this module.
-            IconUri      = 'https://github.com/JeshuaEdgar/msp-toolbox/blob/master/LICENSE'
+            IconUri      = 'https://raw.githubusercontent.com/JeshuaEdgar/msp-toolbox/master/logo.png'
 
             # ReleaseNotes of this module
             ReleaseNotes = 'https://github.com/JeshuaEdgar/msp-toolbox/releases'

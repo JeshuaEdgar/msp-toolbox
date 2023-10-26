@@ -5,10 +5,6 @@
 - Logo in PowerShellGallery
 - `Disconnect-MSPToolbox`, how did I not think about this before..?
 
-## Fixed
-
--
-
 # [1.2.0]
 
 ## Changed
