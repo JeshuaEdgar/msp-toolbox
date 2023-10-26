@@ -1,5 +1,7 @@
 # MSPToolBox
 
+<image src="./logo.png" width="128">
+
 [![PSGalleryVersion](https://img.shields.io/powershellgallery/v/MSPToolBox?style=flat-square)](https://www.powershellgallery.com/packages/MSPToolbox/) [![PSGalleryDownloads](https://img.shields.io/powershellgallery/dt/MSPToolBox?style=flat-square)](https://www.powershellgallery.com/packages/MSPToolbox/)
 
 Created with MSP's in mind for unattended scripts on for example Microsoft Azure Runbooks using the [Secure App Model](https://www.cyberdrain.com/connect-to-exchange-online-automated-when-mfa-is-enabled-using-the-secureapp-model/) and the PartnerCenter module for multi-tenant scripting. See below for some [example(s)](#examples) on how to use it.
@@ -11,7 +13,6 @@ Microsoft's documentation about the [Secure App Model](https://learn.microsoft.c
 ## Changelog
 
 For the changelog please look into the [changelog file](./CHANGELOG.MD)
-
 
 ## Installation
 
@@ -30,7 +31,7 @@ For the documentation please look into the [docs folder](Docs/) or by invoking `
 To connect to the Partner Center use the following
 
 ```powershell
-Connect-MSPToolbox -ApplicationID "YourSecretApplicationID" -ApplicationSecret ("YourApplicationSecret" | Convertto-SecureString -AsPlainText) -RefreshToken ("ThatExtremelyLongRefreshToken" | Convertto-SecureString -AsPlainText) -TenantID "YourTenantID"  
+Connect-MSPToolbox -ApplicationID "YourSecretApplicationID" -ApplicationSecret ("YourApplicationSecret" | Convertto-SecureString -AsPlainText) -RefreshToken ("ThatExtremelyLongRefreshToken" | Convertto-SecureString -AsPlainText) -TenantID "YourTenantID"
 ```
 
 Getting a Graph token for Partner tenant you want to control is easy, just provide the `-TenantID` for the tenant you want to connect to after running `Connect-MSPToolbox`
@@ -62,7 +63,7 @@ Note that the tenant ID in this return object is denoted by `customerId`.
 $connect = @{
     ApplicationID     = "YourSecretApplicationID"
     ApplicationSecret = "YourApplicationSecret" | Convertto-SecureString -AsPlainText
-    Refreshtoken      = "ThatExtremelyLongRefreshToken" | Convertto-SecureString -AsPlainText 
+    Refreshtoken      = "ThatExtremelyLongRefreshToken" | Convertto-SecureString -AsPlainText
     TenantID          = "YourTenantID"
 }
 
@@ -94,8 +95,8 @@ Grant-CSPApplication
 Granting Application Permissions [Granting 38/394...   ]
 
 # Output (when finished):
-Success Failed                                                                                                          
-------- ------                                                                                                          
+Success Failed
+------- ------
     374     20
 
 # For a specific tenant

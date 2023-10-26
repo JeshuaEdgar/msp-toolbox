@@ -12,10 +12,10 @@
     RootModule        = 'MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.2.0'
+    ModuleVersion     = '1.2.1'
 
     # Supported PSEditions
-    # CompatiblePSEditions = @()
+    CompatiblePSEditions = @("Desktop", "Core")
 
     # ID used to uniquely identify this module
     GUID              = '09026508-5ca5-478b-b786-1ac1b51920cf'
@@ -33,7 +33,7 @@
     Description       = 'This module leverages Secure App Model and PartnerCenter to connect to all your Partner Center tenants'
 
     # Minimum version of the PowerShell engine required by this module
-    # PowerShellVersion = ''
+    PowerShellVersion = '5.1'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -111,7 +111,7 @@
             ProjectUri   = 'https://github.com/JeshuaEdgar/msp-toolbox'
 
             # A URL to an icon representing this module.
-            # IconUri = ''
+            IconUri = 'https://github.com/JeshuaEdgar/msp-toolbox/blob/master/LICENSE'
 
             # ReleaseNotes of this module
             ReleaseNotes = 'https://github.com/JeshuaEdgar/msp-toolbox/releases'

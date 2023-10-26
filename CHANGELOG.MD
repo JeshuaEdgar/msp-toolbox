@@ -1,4 +1,12 @@
-## [1.2.0]
+# [1.2.1]
+
+## Added
+- Logo in PowerShellGallery
+
+## Fixed
+- 
+
+# [1.2.0]
 
 ## Changed
 
