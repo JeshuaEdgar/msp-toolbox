@@ -1,17 +1,22 @@
 # [1.2.1]
 
 ## Added
+
 - Logo in PowerShellGallery
+- `Disconnect-MSPToolbox`, how did I not think about this before..?
 
 ## Fixed
-- 
+
+-
 
 # [1.2.0]
 
 ## Changed
 
 ### Breaking change!
+
 `Connect-MSPToolbox` no longer accepts plaintext input for the following parameters:
+
 - `-ApplicationSecret`
 - `-RefreshToken`
 
@@ -20,9 +25,9 @@ Please add `| ConvertTo-SecureString -AsPlainText -Force` at the end of your sec
 ## Added
 
 - New cmdlet `Grant-CSPApplication` !
-    - This will grant your CSP application across all your managed tenants, if the app is already present in the tenant it will remove the application and grant it again, this is useful when you need to update the permissions since those won't be copied over anymore.
-    - Optional parameter `-CustomerTenantID` for when you want to run it on just one tenant.
-    - Example can be found in the [examples section](/README.md#examples)
+  - This will grant your CSP application across all your managed tenants, if the app is already present in the tenant it will remove the application and grant it again, this is useful when you need to update the permissions since those won't be copied over anymore.
+  - Optional parameter `-CustomerTenantID` for when you want to run it on just one tenant.
+  - Example can be found in the [examples section](/README.md#examples)
 - Debugging on all cmdlet's to help troubleshoot + a new internal debug printer
 
 ## Fixed
@@ -46,7 +51,7 @@ Please add `| ConvertTo-SecureString -AsPlainText -Force` at the end of your sec
 ## Removed
 
 - Dependencies! Module is now independant, switched `New-PartnerAccessToken` for `Invoke-RestMethod`'s
-    - With this comes a drastic improvement on speed when connecting to multiple tenants
+  - With this comes a drastic improvement on speed when connecting to multiple tenants
 
 ## Added
 
@@ -58,7 +63,7 @@ Please add `| ConvertTo-SecureString -AsPlainText -Force` at the end of your sec
 ## Fixed
 
 - Accept `[hashtable]` and `[pscustomobject]` on `Invoke-MSPGraphRequest`
-- `Write-Error` is the default method for handling errors now 
+- `Write-Error` is the default method for handling errors now
 
 ## Added
 
@@ -88,7 +93,7 @@ This marks the first non-prerelease version of MSPToolbox! I feel like this vers
 
 ## Fixed
 
-- Module now exports cmdlet's instead of functions 
+- Module now exports cmdlet's instead of functions
 - PartnerCenter module import
 - Unnecesary throws
 
@@ -96,19 +101,19 @@ This marks the first non-prerelease version of MSPToolbox! I feel like this vers
 
 ## Changed
 
-- ```Invoke-MSPGraphRequest```
-    - Previously called ```New-GraphRequest```
-    - Returns 'value' by default if present. No need to add ```.value``` to extract it
-    - Pagination of data if ```@odata.nextLink``` is returned
-    - ```$Customer``` boolean switch, if you want to do a Graph request on your CSP tenant, default is set to ```$true```
-    - Default method is now set to ```Get```
+- `Invoke-MSPGraphRequest`
+  - Previously called `New-GraphRequest`
+  - Returns 'value' by default if present. No need to add `.value` to extract it
+  - Pagination of data if `@odata.nextLink` is returned
+  - `$Customer` boolean switch, if you want to do a Graph request on your CSP tenant, default is set to `$true`
+  - Default method is now set to `Get`
 
 # [0.0.1-alpha]
 
 ## Added
 
-- ```Connect-MSPToolbox```
-- ```Connect-MSPToolboxPartner```
-- ```Get-MSPToolboxCurrentConnection```
-- ```Get-MSPToolboxPartnerList```
-- ```New-GraphRequest```
+- `Connect-MSPToolbox`
+- `Connect-MSPToolboxPartner`
+- `Get-MSPToolboxCurrentConnection`
+- `Get-MSPToolboxPartnerList`
+- `New-GraphRequest`

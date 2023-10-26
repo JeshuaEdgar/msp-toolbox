@@ -3,7 +3,7 @@ $ScriptPath = Split-Path $MyInvocation.MyCommand.Path
 #endregion discover module name
 
 #load variables for module
-$mspToolBoxData = @{
+$script:mspToolBoxSession = @{
     ApplicationID       = $null
     ApplicationSecret   = $null
     Refreshtoken        = $null
@@ -15,7 +15,6 @@ $mspToolBoxData = @{
     CustomerTenantID    = $null
     ConnectedTenant     = $null
 }
-$script:mspToolBoxSession = $mspToolBoxData
 #end of variables
 
 #load functions
