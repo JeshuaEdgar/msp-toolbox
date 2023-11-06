@@ -1,3 +1,13 @@
+# [1.2.2]
+
+## Added
+
+- `Disconnect-MSPPartner`
+
+## Removed
+
+- `-AsMSP` switch. When not connected with a partner it defaults to the MSP authentication header in `New-MSPGraphRequest`
+
 # [1.2.1]
 
 ## Added
