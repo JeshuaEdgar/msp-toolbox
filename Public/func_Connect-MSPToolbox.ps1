@@ -9,6 +9,7 @@ function Connect-MSPToolbox {
         [SecureString]$Refreshtoken,
         [parameter(Mandatory = $true)]
         [string]$TenantID
+        [switch]$ReturnAccessToken
     )
     $ErrorActionPreference = "Stop"
     # internal function to decode passwords
@@ -60,5 +61,10 @@ function Connect-MSPToolbox {
     catch {
         Write-Error (Format-ErrorCode $_)
     }
-    Write-Output "Connected to MSPToolbox!"
+    if ($ReturnAccessToken) {
+        return $graphToken.access_token
+    }
+    else {
+        Write-Output "Connected to MSPToolbox!"
+    }
 }

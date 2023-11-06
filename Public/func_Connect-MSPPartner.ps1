@@ -3,7 +3,8 @@ function Connect-MSPPartner {
         [CmdletBinding()]
         [parameter(Mandatory = $true)]
         [string]$TenantID,
-        [string]$Scope
+        [string]$Scope,
+        [switch]$ReturnAccessToken
     )
     Test-MSPToolboxConnection
     if (-not $Scope) { $Scope = "https://graph.microsoft.com/.default" }
@@ -24,7 +25,12 @@ function Connect-MSPPartner {
         $organisationCheck = Invoke-MSPGraphRequest -Method Get -Endpoint "organization"
         $script:mspToolBoxSession.ConnectedTenant = $organisationCheck.displayName
         $script:mspToolBoxSession.CustomerTokenExpiry = [datetime](Get-Date).AddSeconds($customerTokenRequest.expires_in)
-        Write-Output ("Connected to tenant {0}" -f $organisationCheck.displayName)
+        if ($ReturnAccessToken) {
+            return $customerTokenRequest.access_token
+        }
+        else {
+            Write-Output ("Connected to tenant {0}" -f $organisationCheck.displayName)
+        }
     }
     catch {
         Write-Error (Format-ErrorCode $_)

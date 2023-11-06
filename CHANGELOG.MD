@@ -2,6 +2,12 @@
 
 ## Added
 
+- `-ReturnAccessToken` on both `Connect-MSPToolbox` and `Connect-MSPPartner`
+
+# [1.2.2]
+
+## Added
+
 - `Disconnect-MSPPartner`
 
 ## Removed
