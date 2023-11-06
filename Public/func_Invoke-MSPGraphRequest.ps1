@@ -4,23 +4,23 @@ function Invoke-MSPGraphRequest {
         [parameter (Mandatory = $true)][string]$Endpoint,
         [parameter (Mandatory = $false)][ValidateSet("Delete", "Get", "Patch", "Post", "Put")]$Method = "Get",
         $Body,
-        [switch]$Beta,
-        [switch]$AsMSP
+        [switch]$Beta
     )
     # checks before connection
     Test-MSPToolboxConnection
-    if (($null -eq $script:mspToolBoxSession.CustomerAuthHeader) -and (-not $AsMSP)) {
-        throw "MSPToolbox | You are not connected to a Partner, please run 'Connect-MSPPartner' to connect to a Partner or use '`-MSP' to run the Graph Request under the MSP tenant"
-    }
 
     # build the request
     if ($Beta) { $baseURL = "https://graph.microsoft.com/{0}/" -f "beta" }
     else { $baseURL = "https://graph.microsoft.com/{0}/" -f "v1.0" }
     if ($Endpoint.StartsWith("/")) { $Endpoint = $Endpoint.Substring(1) }
+    # check if customerAuthHeader is present
+    if (-not $script:mspToolBoxSession.CustomerAuthHeader) { $authHeader = $script:mspToolBoxSession.MSPAuthHeader }
+    else { $authHeader = $script:mspToolBoxSession.CustomerAuthHeader }
+    # make request splat
     $reqSplat = @{
         Method  = $Method
         URI     = $baseUrl + $Endpoint
-        Headers = $script:mspToolBoxSession.CustomerAuthHeader
+        Headers = $authHeader
     }
     if ($Body -is [hashtable] -or [pscustomobject]) {
         $reqSplat.Body += $Body | ConvertTo-Json -Depth 5
