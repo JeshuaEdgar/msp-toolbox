@@ -1,8 +1,19 @@
+# [1.2.5]
+
+## Changed
+
+- `Grant-CSPApplication` is now `Grant-MSPApplication`
+
+## Fixed
+
+- `Get-MSPToolboxPartnerList` was still using the -AsMSP switch internally
+- `Grant-MSPApplication` was still using the -AsMSP switch internally
+
 # [1.2.4]
 
 ## Fixed
 
-- `Connect-MSPToolbox`
+- `Connect-MSPToolbox` was missing some syntax which broke the module import
 
 # [1.2.3]
 

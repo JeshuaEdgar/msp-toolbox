@@ -1,4 +1,4 @@
-function Grant-CSPApplication {
+function Grant-MSPApplication {
     [CmdletBinding()]
     param (
         [string]$CustomerTenantID
@@ -55,17 +55,17 @@ function Grant-CSPApplication {
     try {
         if ($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status "Getting and building application consent body..." }
 
-        $appInformation = Invoke-MSPGraphRequest -Endpoint ("applications(appId='{0}')" -f $script:mspToolBoxSession.ApplicationId) -AsMSP
+        $appInformation = Invoke-MSPGraphRequest -Endpoint ("applications(appId='{0}')" -f $script:mspToolBoxSession.ApplicationId)
         New-DebugLine "Got application information"
 
-        $requiredResource = Invoke-MSPGraphRequest -Endpoint "applications/$($appInformation.id)/?`$select=requiredResourceAccess" -AsMSP | Select-Object -ExpandProperty requiredResourceAccess
+        $requiredResource = Invoke-MSPGraphRequest -Endpoint "applications/$($appInformation.id)/?`$select=requiredResourceAccess" | Select-Object -ExpandProperty requiredResourceAccess
         New-DebugLine "Required resources collected"
 
         $bodyBuilder = @()
         foreach ($resourceApp in $requiredResource) {
             if ($progress -eq $true) { Write-Progress -Activity "Granting Application Permissions" -Status ("Getting enterprise application permissions for app {0}" -f $resourceApp.resourceAppId) -PercentComplete (([array]::IndexOf($requiredResource, $resourceApp) / $requiredResource.Count) * 100) }
             New-DebugLine ("Getting enterprise application permissions for app {0}" -f $resourceApp.resourceAppId)
-            $enterPriseAppPermissions = Invoke-MSPGraphRequest -Endpoint ("servicePrincipals?`$filter=appid eq '{0}'&`$select=oauth2PermissionScopes" -f $resourceApp.resourceAppId) -AsMSP | Select-Object -ExpandProperty oauth2PermissionScopes
+            $enterPriseAppPermissions = Invoke-MSPGraphRequest -Endpoint ("servicePrincipals?`$filter=appid eq '{0}'&`$select=oauth2PermissionScopes" -f $resourceApp.resourceAppId) | Select-Object -ExpandProperty oauth2PermissionScopes
             [pscustomobject]$applicationAndRoles = @{
                 enterpriseApplicationId = $resourceApp.resourceAppId
                 scope                   = ($enterPriseAppPermissions | Where-Object { $_.id -in $resourceApp.resourceAccess.id } | Select-Object -ExpandProperty value | Where-Object { $_ -notin $ignoreRoleList }) -join ","

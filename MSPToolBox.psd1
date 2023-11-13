@@ -12,7 +12,7 @@
     RootModule           = 'MSPToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '1.2.4'
+    ModuleVersion        = '1.2.5'
 
     # Supported PSEditions
     CompatiblePSEditions = @("Desktop", "Core")
@@ -76,7 +76,7 @@
         "Disconnect-MSPPartner",
         "Get-MSPToolboxCurrentConnection",
         "Get-MSPToolboxPartnerList",
-        "Grant-CSPApplication"
+        "Grant-MSPApplication"
         "Invoke-MSPGraphRequest"
     )
 
