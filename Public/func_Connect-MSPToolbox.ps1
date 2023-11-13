@@ -8,7 +8,7 @@ function Connect-MSPToolbox {
         [parameter(Mandatory = $true)]
         [SecureString]$Refreshtoken,
         [parameter(Mandatory = $true)]
-        [string]$TenantID
+        [string]$TenantID,
         [switch]$ReturnAccessToken
     )
     $ErrorActionPreference = "Stop"

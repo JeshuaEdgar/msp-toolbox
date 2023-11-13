@@ -1,3 +1,9 @@
+# [1.2.4]
+
+## Fixed
+
+- `Connect-MSPToolbox`
+
 # [1.2.3]
 
 ## Added
