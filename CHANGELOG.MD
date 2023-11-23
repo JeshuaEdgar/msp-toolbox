@@ -1,3 +1,10 @@
+# [1.2.6]
+
+## Fixed
+
+- Automatic refreshing of tokens was not using secure strings
+- `Get-MSPToolboxPartnerList` was not working when connected to a tenant
+
 # [1.2.5]
 
 ## Changed

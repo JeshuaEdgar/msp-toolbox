@@ -17,7 +17,13 @@ function Test-MSPToolboxConnection {
         if (-not [string]::IsNullOrEmpty($sessionData.MSPTokenExpiry)) {
             if ($sessionData.MSPTokenExpiry -lt (Get-Date).AddMinutes(-15)) {
                 Write-Warning "MSP token is about to expire, generating a new one"
-                Connect-MSPToolbox -TenantID $sessionData.TenantID -ApplicationID $sessionData.ApplicationID -ApplicationSecret $sessionData.ApplicationSecret -Refreshtoken $sessionData.Refreshtoken | Out-Null
+                $connectSplat = @{
+                    TenantID          = $sessionData.TenantID
+                    ApplicationID     = $sessionData.ApplicationID
+                    ApplicationSecret = $sessionData.ApplicationSecret | ConvertTo-SecureString -AsPlainText -Force
+                    RefreshToken      = $sessionData.Refreshtoken | ConvertTo-SecureString -AsPlainText -Force
+                }
+                Connect-MSPToolbox @connectSplat | Out-Null
             }
         }
     }
