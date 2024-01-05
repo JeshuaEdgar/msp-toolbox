@@ -74,6 +74,8 @@ function Grant-MSPApplication {
                 $bodyBuilder += $applicationAndRoles
             }
         }
+        New-DebugLine "Application consent body:"
+        New-DebugLine ($bodyBuilder | Out-String)
     }
     catch {
         Write-Error (Format-ErrorCode $_)

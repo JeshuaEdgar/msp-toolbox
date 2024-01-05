@@ -1,5 +1,11 @@
 # [1.2.6]
 
+## Added
+
+- Debug output for granting CSP application
+
+# [1.2.6]
+
 ## Fixed
 
 - Automatic refreshing of tokens was not using secure strings
